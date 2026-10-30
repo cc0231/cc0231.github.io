@@ -140,9 +140,9 @@ p { margin: 0; max-width: var(--measure); }
 
 .edu { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
 .edu .degree { font-size: 15.5px; color: var(--ink); }
-.edu-detail { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 15px; color: var(--muted); max-width: var(--measure); }
-.edu-detail li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; align-items: baseline; }
-.edu-detail .lab { display: block; font-family: var(--font-mono); font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; }
+.edu .degree.minor { color: var(--muted); font-size: 14.5px; margin-top: -8px; }
+.teach .degree { color: var(--muted); font-size: 15px; }
+.teach .degree + .degree { margin-top: -6px; }
 
 .contact { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 16px; font-size: 15.5px; }
 .contact dt { color: var(--muted); font-family: var(--font-mono); font-size: 12.5px; padding-top: 3px; }
@@ -259,6 +259,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
         <li><a href="#education">Education</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#earlier">Additional projects</a></li>
+        <li><a href="#teaching">Teaching</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a class="ext" href="MX_Resume_2610.pdf"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>CV</a></li>
         <li><a class="ext" href="https://github.com/cc0231"><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</a></li>
@@ -347,36 +348,22 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
           <div class="project-tag">08/2025&ndash;present<br>Dallas, TX</div>
           <div class="project-body">
             <h3>UT Southwestern Medical Center</h3>
-            <p class="degree">PhD in Biomedical Engineering &middot; Biomedical &amp; Molecular Imaging track</p>
-            <ul class="edu-detail">
-              <li><span class="lab">Lab</span><span>Pediatric Cardiac MR Imaging Lab, Division of Pediatric Cardiology; advisor <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a></span></li>
-              <li><span class="lab">Research</span><span>Accelerated 4D flow MRI reconstruction and label-efficient segmentation of single-ventricle cine CMR</span></li>
-            </ul>
+            <p class="degree">PhD in Biomedical Engineering</p>
           </div>
         </li>
         <li class="project">
           <div class="project-tag">08/2021&ndash;08/2022<br>Baltimore, MD</div>
           <div class="project-body">
             <h3>Johns Hopkins University</h3>
-            <p class="degree">MSE in Biomedical Engineering &middot; Imaging and Medical Devices track &middot; GPA 3.95/4.0</p>
-            <ul class="edu-detail">
-              <li><span class="lab">Research</span><span>Advanced Imaging Algorithms and Instrumentation Lab: radiomics recovery and 3D-printed CT phantoms</span></li>
-              <li><span class="lab">Teaching</span><span>Graduate TA for Biomedical Data Science Laboratory (580.475/477) and Physiology for Applied Biomedical Engineering I (585.601)</span></li>
-              <li><span class="lab">Coursework</span><span>Radiology for Engineers; Introduction to Computational Medicine: Imaging; Modern Optical Microscopy; Principles and Applications of Modern X-Ray &amp; Tomography; Systems Pharmacology and Personalized Medicine</span></li>
-            </ul>
+            <p class="degree">MSE in Biomedical Engineering</p>
           </div>
         </li>
         <li class="project">
           <div class="project-tag">08/2017&ndash;05/2021<br>St. Louis, MO</div>
           <div class="project-body">
             <h3>Washington University in St. Louis</h3>
-            <p class="degree">BS in Biomedical Engineering &middot; second major in Financial Engineering &middot; minor in Mathematics and Computer Science</p>
-            <ul class="edu-detail">
-              <li><span class="lab">Honors</span><span>GPA 3.93/4.0, summa cum laude, Dean&rsquo;s List every semester; Tau Beta Pi, Alpha Eta Mu Beta, BMES member</span></li>
-              <li><span class="lab">Research</span><span>Undergraduate research on U-Net vessel segmentation of mouse-brain photoacoustic images</span></li>
-              <li><span class="lab">Teaching</span><span>TA for six BME and CSE courses (including Introduction to Machine Learning and Data Structures and Algorithms), lead grader for Differential Equations and Foundations for Higher Mathematics, and engineering tutor (2018&ndash;2021)</span></li>
-              <li><span class="lab">Coursework</span><span>Quantitative Physiology; Introduction to Machine Learning; Introduction to Artificial Intelligence; Mathematics of Imaging Science; Biological Imaging Technology; Fundamentals and Applications of Modern Optical Imaging</span></li>
-            </ul>
+            <p class="degree">BS in Biomedical Engineering and Financial Engineering (double major)</p>
+            <p class="degree minor">Minor in Mathematics and Computer Science</p>
           </div>
         </li>
       </ul>
@@ -425,9 +412,13 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
             <p>On the CMRx4DFlow 2026 data, compared with a training-matched baseline, it cuts relative velocity error by 38&ndash;50% and angular error by 7.0&ndash;8.7&deg;, and improves every held-out subject at every acceleration. On out-of-distribution data, JSSL raises SSIM by 7.2% and lowers angular and relative error by 38% and 31%.</p>
         </div>
       </article>
-      <article class="project rcard nofig c-coral">
+      <article class="project rcard c-coral">
         <div class="rcard-side">
           <div class="project-tag">Point-of-care diagnostics<br>Rice University</div>
+              <figure class="fig">
+                <img src="img/lfa_ga.png" alt="Graphical abstract: a smartphone photo of a CRISPR-Cas-based lateral flow assay strip is passed to trained neural network models, which output positive or negative." loading="lazy">
+                <figcaption>Graphical abstract: a phone photo of the CRISPR-Cas strip goes to the trained networks, which call it positive or negative.</figcaption>
+              </figure>
           <div class="chips">
                 <span class="chip status">Sensors &amp; Diagnostics 2025</span>
                 <a class="chip" href="https://doi.org/10.1039/D4SD00314D">paper</a>
@@ -506,6 +497,35 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
             <div class="mini-meta">WashU &middot; 2020</div>
             <h3>Photoacoustic vessel segmentation</h3>
             <p>U-Net vessel segmentation in mouse-brain photoacoustic images.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="teaching" aria-labelledby="teaching-h">
+      <div class="sec-head"><h2 id="teaching-h">Teaching &amp; Service</h2></div>
+      <ul class="edu teach">
+        <li class="project">
+          <div class="project-tag">08/2022&ndash;05/2023<br>Johns Hopkins</div>
+          <div class="project-body">
+            <h3>Graduate Teaching Assistant</h3>
+            <p class="degree">Biomedical Data Science Laboratory (580.475/477), Dr. Brian Caffo</p>
+            <p class="degree">Physiology for Applied Biomedical Engineering I (585.601), Dr. Caitlin Torgerson</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">08/2019&ndash;05/2021<br>WashU</div>
+          <div class="project-body">
+            <h3>Undergraduate Teaching Assistant</h3>
+            <p class="degree">Introduction to Biomedical Engineering (BME 140) &middot; Bioengineering Thermodynamics (BME 320) &middot; Introduction to Computer Science (CSE 131) &middot; Introduction to Data Science (CSE 217) &middot; Data Structures and Algorithms (CSE 247) &middot; Introduction to Machine Learning (CSE 417)</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">08/2018&ndash;05/2021<br>WashU</div>
+          <div class="project-body">
+            <h3>Grader and Engineering Tutor</h3>
+            <p class="degree">Lead grader for Differential Equations (Math 217) and Foundations for Higher Mathematics (Math 310); grader for Mathematics in Physical Science (Math 308) and Probability (Math 493)</p>
+            <p class="degree">Tutored 20+ engineering students, 7&ndash;10 hours a week</p>
           </div>
         </li>
       </ul>
