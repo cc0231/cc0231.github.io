@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mengyuan Xue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* Layout: fixed identity column on the left (sticky on desktop), reading column on the right; stacks below 820px. */
+:root {
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --ink: #14212b;
+  --muted: #5a6977;
+  --rule: #d8e0e5;
+  --accent: #0d6b78;
+  --fill: #fff3cf;
+  --fill-ink: #6b5200;
+  --bar: #0d4f59;
+  --bar-ink: #ffffff;
+  --bar-muted: #b9d6da;
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --measure: 66ch;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1418;
+    --surface: #141c21;
+    --ink: #e3e9ed;
+    --muted: #94a3af;
+    --rule: #25323b;
+    --accent: #5ec4d0;
+    --fill: #3a3112;
+    --fill-ink: #f1d98a;
+    --bar: #13343a;
+    --bar-ink: #e3e9ed;
+    --bar-muted: #94b3b8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1418;
+  --surface: #141c21;
+  --ink: #e3e9ed;
+  --muted: #94a3af;
+  --rule: #25323b;
+  --accent: #5ec4d0;
+  --fill: #3a3112;
+  --fill-ink: #f1d98a;
+  --bar: #13343a;
+  --bar-ink: #e3e9ed;
+  --bar-muted: #94b3b8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.6;
+}
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+/* Top bar: one solid slab with the name and the section links */
+.topbar { position: sticky; top: 0; z-index: 10; background: var(--bar); color: var(--bar-ink); }
+.topbar-inner { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px 32px; flex-wrap: wrap; }
+.name { font-family: var(--font-display); font-weight: 500; font-size: 26px; line-height: 1.1; letter-spacing: -0.01em; }
+.name a { color: inherit; text-decoration: none; }
+.nav { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 14.5px; }
+.nav a { color: var(--bar-muted); text-decoration: none; }
+.nav a:hover { color: var(--bar-ink); text-decoration: underline; }
+.nav a:focus-visible { outline-color: var(--bar-ink); }
+.nav .ext { color: var(--bar-ink); font-weight: 500; }
+
+.page { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 56px; }
+section { scroll-margin-top: 84px; }
+.role { font-size: 15px; color: var(--muted); line-height: 1.5; margin: 0; }
+.role strong { color: var(--ink); font-weight: 500; }
+
+/* Reading column */
+main { display: flex; flex-direction: column; gap: 56px; min-width: 0; }
+section { display: flex; flex-direction: column; gap: 18px; }
+.sec-head { display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+.sec-head h2 { font-family: var(--font-display); font-weight: 500; font-size: 27px; }
+p { margin: 0; max-width: var(--measure); }
+.lede { font-family: var(--font-display); font-size: 21px; line-height: 1.5; }
+
+.project { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 20px; padding: 6px 0; }
+.project + .project { border-top: 1px dashed var(--rule); padding-top: 24px; }
+.project-tag { font-family: var(--font-mono); font-size: 12px; color: var(--muted); line-height: 1.5; padding-top: 4px; }
+.project-body { display: flex; flex-direction: column; gap: 10px; }
+.project h3 { font-size: 18px; font-weight: 600; line-height: 1.35; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.chip { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--rule); background: var(--surface); padding: 2px 9px; border-radius: 3px; color: var(--muted); }
+.chip.status { border-color: var(--accent); color: var(--accent); }
+.math { font-family: var(--font-mono); font-size: 0.92em; }
+
+.pubs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+.pub { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 16px; }
+.pub-year { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.pub-title { font-weight: 500; }
+.pub-meta { color: var(--muted); font-size: 15px; }
+.pub-meta em { font-style: italic; }
+.me { font-weight: 600; color: var(--ink); }
+
+.edu { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.edu li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: baseline; }
+.edu .where { font-weight: 500; }
+.edu .what { color: var(--muted); font-size: 15px; display: block; }
+.edu .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.contact { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 16px; font-size: 15.5px; }
+.contact dt { color: var(--muted); font-family: var(--font-mono); font-size: 12.5px; padding-top: 3px; }
+.contact dd { margin: 0; }
+
+a.chip { text-decoration: none; color: var(--accent); }
+a.chip:hover { border-color: var(--accent); }
+
+.earlier { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.earlier .where { font-weight: 500; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; max-width: var(--measure); }
+.earlier .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+.earlier p { color: var(--muted); font-size: 15px; }
+
+.fig { margin: 4px 0 2px; max-width: var(--measure); }
+.fig img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: #fff; border-radius: 2px; }
+.earlier .fig { max-width: 520px; }
+.fig figcaption { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+
+/* Placeholders the owner still needs to fill in */
+.fill { background: var(--fill); color: var(--fill-ink); padding: 0 4px; border-radius: 2px; font-style: normal; }
+
+footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); border-top: 1px solid var(--rule); padding-top: 16px; }
+
+@media (max-width: 820px) {
+  .page { gap: 40px; padding-top: 32px; }
+  .topbar-inner { padding: 12px 20px; }
+  .name { font-size: 23px; }
+  .nav { gap: 2px 16px; font-size: 14px; }
+  section { scroll-margin-top: 120px; }
+}
+@media (max-width: 520px) {
+  .project, .pub { grid-template-columns: 1fr; gap: 6px; }
+  .contact { grid-template-columns: 1fr; gap: 2px; }
+  .contact dd { margin-bottom: 10px; }
+  .lede { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <h1 class="name"><a href="#about">Mengyuan Xue</a></h1>
+    <nav aria-label="Sections">
+      <ul class="nav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#earlier">Earlier work</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="ext" href="cv.pdf">CV</a></li>
+        <li><a class="ext" href="https://github.com/cc0231">GitHub</a></li>
+        <!-- <li><a class="ext" href="https://scholar.google.com/citations?user=">Scholar</a></li> : add your profile id, then uncomment -->
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page">
+
+  <main>
+    <section id="about" aria-labelledby="about-h">
+      <div class="sec-head"><h2 id="about-h">About</h2></div>
+      <p class="role"><strong>PhD student</strong>, Biomedical Engineering &middot; UT Southwestern Medical Center &middot; Pediatric Cardiac MR Imaging Lab &middot; Dallas, TX</p>
+      <p class="lede">I build deep learning methods for cardiovascular MRI, from reconstructing accelerated 4D flow scans to segmenting the heart in patients with congenital heart disease.</p>
+      <p>I'm a PhD student in Biomedical Engineering at UT Southwestern, advised by <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a> in the Division of Pediatric Cardiology. My current work covers physics-driven unrolled networks for undersampled MRI and label-efficient segmentation of single-ventricle hearts with the SAM2 foundation model. Before UTSW I worked on imaging and machine learning across modalities: smartphone diagnostics and oral cancer screening at Rice University, PET/MR attenuation correction at United Imaging, and CT radiomics at Johns Hopkins. I studied at Washington University in St. Louis and Johns Hopkins University.</p>
+    </section>
+
+    <section id="research" aria-labelledby="research-h">
+      <div class="sec-head"><h2 id="research-h">Research</h2></div>
+
+      <article class="project">
+        <div class="project-tag">MR reconstruction<br>4D flow</div>
+        <div class="project-body">
+          <h3>Joint supervised and self-supervised training for accelerated 4D flow MRI</h3>
+          <p>In 4D flow MRI the diagnostic signal is the phase difference between velocity encodings, so a reconstruction can look right in magnitude and still get the flow wrong. We extend a per-encoding variational network (FlowVN) with joint supervised and self-supervised training (JSSL) on both magnitude and velocity, plus acquisition-robust and acceleration-conditioned training, so one model covers R = 10&ndash;50 on 1.5 T and 3 T aortic scans.</p>
+          <p>On the CMRx4DFlow 2026 data, compared with a training-matched baseline, it cuts relative velocity error by 38&ndash;50% and angular error by 7.0&ndash;8.7&deg;, and improves every held-out subject at every acceleration. On out-of-distribution data, JSSL raises SSIM by 7.2% and lowers angular and relative error by 38% and 31%.</p>
+          <figure class="fig">
+            <img src="img/flow4d.png" alt="Aortic 4D flow slice: magnitude and velocity magnitude for the fully sampled reference, zero-filled, CS-LLR, baseline and proposed reconstructions. Proposed SSIM 0.956 versus 0.924 for the baseline." loading="lazy">
+            <figcaption>Magnitude (top) and velocity magnitude (bottom) of one aortic slice: reference, zero-filled, CS-LLR, baseline FlowVN and ours.</figcaption>
+          </figure>
+          <div class="chips">
+            <span class="chip status">MICCAI 2026 &middot; CMRx4DFlow</span>
+            <a class="chip" href="https://arxiv.org/abs/2609.38644">arXiv</a>
+            <a class="chip" href="https://papers.miccai.org/miccai-2026-sat/paper/CMRxRecon2026_016.pdf">paper</a>
+            <a class="chip" href="https://github.com/cc0231/FlowVN-JSSL">code</a>
+            <span class="chip">unrolled networks</span>
+          </div>
+        </div>
+      </article>
+      <article class="project">
+        <div class="project-tag">Cardiac segmentation<br>single ventricle</div>
+        <div class="project-body">
+          <h3>SV-MRSeg: detector-prompted SAM2 for label-efficient segmentation of single-ventricle cine CMR</h3>
+          <p>Patients with single-ventricle physiology need surgical palliation and lifelong cardiac MRI, and their anatomy varies too much for networks trained on biventricular hearts. Contouring cine images by hand is slow, and usually only the end-diastolic and end-systolic frames get traced. SV-MRSeg carries SimLVSeg's sparse-label training over to cine CMR, swaps its 3D U-Net for the SAM2 foundation-model encoder, and prompts SAM2 with boxes from a YOLO detector so segmentation runs fully automatically.</p>
+          <p>Trained on 161 patients and tested on 33 held-out patients, it reaches a per-patient Dice of 0.917 against 0.902 for SimLVSeg, with EDV and ESV biases of +0.1 and 0.0 mL against manual contours. Trained on only 8 patients, the SAM2 backbone keeps a Dice of 0.892, while SimLVSeg falls to 0.543.</p>
+          <figure class="fig">
+            <img src="img/svmrseg_qual.png" alt="Short-axis cine test slices with manual contours in light blue and predictions in magenta for SimLVSeg with SSL, the SAM2 baseline and SV-MRSeg at end-diastole and end-systole. Dice ranges from 0.84 to 0.96." loading="lazy">
+            <figcaption>Test slices at the median (top) and 25th-percentile (bottom) SV-MRSeg Dice, at end-diastole (ED) and end-systole (ES). Light blue: manual contour; magenta: prediction; number: Dice.</figcaption>
+          </figure>
+          <figure class="fig">
+            <img src="img/svmrseg.png" alt="Per-patient test Dice versus number of training patients from 8 to 161. SAM2 stays near 0.89 to 0.92 at every size; SimLVSeg drops to 0.54 with 8 patients when trained with two labels per cine and to 0.35 with one." loading="lazy">
+            <figcaption>Test Dice vs number of training patients, with one (single) or two (double) contoured frames per cine.</figcaption>
+          </figure>
+          <div class="chips">
+            <span class="chip status">ISMRM abstract</span>
+            <span class="chip">SAM2</span>
+            <span class="chip">YOLO</span>
+            <span class="chip">congenital heart disease</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="earlier" aria-labelledby="earlier-h">
+      <div class="sec-head"><h2 id="earlier-h">Earlier work</h2></div>
+      <ul class="earlier">
+        <li>
+          <div class="where">Smartphone reading of CRISPR lateral flow assays <span class="when">Rice University &middot; 2023&ndash;2025</span></div>
+          <p>Segmentation and a lightweight classifier that read CRISPR-Cas13 lateral flow strips from ordinary phone photos (97.7% accuracy on 2,400+ held-out images). <a href="https://doi.org/10.1039/D4SD00314D">paper</a> &middot; <a href="https://github.com/cc0231/CRISPR-Cas13a-LFA-Interpretation">code</a></p>
+        </li>
+        <li>
+          <div class="where">Mobile oral cancer screening (mDOC) <span class="when">Rice University &middot; 2023&ndash;2025</span></div>
+          <p>mDOC is a smartphone device in a 3D-printed case that captures white-light and 405 nm autofluorescence images of the oral cavity. I built lightweight segmentation networks (U-Net with MobileNetV2/V3 encoders) that outline the oral mucosa, and a MobileNetV3 referral classifier on the masked image pairs with Grad-CAM++ attention maps. The whole pipeline runs in an Android app, so a referral decision comes back within 10 minutes of imaging. <a href="https://doi.org/10.1117/12.3034638">SPIE paper</a></p>
+          <figure class="fig">
+            <img src="img/mdoc.jpg" alt="mDOC workflow: a white-light and autofluorescence image pair is resized, masked and cropped to the region of interest, a CNN outputs a refer-to-specialist decision, and an attention map highlights the regions that drove it." loading="lazy">
+            <figcaption>mDOC workflow: image pair &rarr; mucosa masking &rarr; CNN referral decision with an attention map.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <div class="where">fNIRS fiber attenuation correction for PET <span class="when">United Imaging &middot; 2023</span></div>
+          <p>Correction of optical-fiber attenuation for PET reconstruction on a PET/MR/fNIRS system, implemented in C++ for the uPMR790 scanner.</p>
+        </li>
+        <li>
+          <div class="where">Radiomics under varying resolution <span class="when">Johns Hopkins &middot; 2022&ndash;2023</span></div>
+          <p>Predicting and recovering wavelet- and Fourier-domain radiomic features under different blur and noise, validated with simulated and 3D-printed CT phantoms.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="publications" aria-labelledby="pubs-h">
+      <div class="sec-head"><h2 id="pubs-h">Publications</h2></div>
+      <ol class="pubs" reversed>
+        <li class="pub">
+          <div class="pub-year">2026</div>
+          <div>
+            <div class="pub-title"><a href="https://papers.miccai.org/miccai-2026-sat/paper/CMRxRecon2026_016.pdf">Joint Supervised and Self-Supervised Training with Acquisition-Robust Techniques for Accelerated 4D Flow MRI Reconstruction</a></div>
+            <div class="pub-meta"><span class="me">M. Xue</span>*, B. Mei*. <em>MICCAI 2026, STACOM / CMRx4DFlow Challenge</em>. <a href="https://arxiv.org/abs/2609.38644">arXiv</a> &middot; <a href="https://github.com/cc0231/FlowVN-JSSL">code</a></div>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="pub-year">2025</div>
+          <div>
+            <div class="pub-title"><a href="https://doi.org/10.1039/D4SD00314D">Rapid and automated interpretation of CRISPR-Cas13-based lateral flow assay test results using machine learning</a></div>
+            <div class="pub-meta"><span class="me">M. Xue</span>*, D. Gonzalez*, E. Ospika, X. Gao, P. B. Lillehoj. <em>Sensors &amp; Diagnostics</em>. <a href="https://github.com/cc0231/CRISPR-Cas13a-LFA-Interpretation">code</a></div>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="pub-year">2024</div>
+          <div>
+            <div class="pub-title"><a href="https://doi.org/10.1117/12.3034638">A deep learning mucosal segmentation algorithm for a mobile Detection of Oral Cancer (mDOC) platform</a></div>
+            <div class="pub-meta"><span class="me">M. Xue</span>, R. Mitbander, J. Carns, R. A. Schwarz, N. Vigneswaran, A. Gillenwater, R. Richards-Kortum. <em>Proc. SPIE 13186, Translational Biophotonics</em>.</div>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="pub-year">2024</div>
+          <div>
+            <div class="pub-title">Development of a deep learning model for accurate interpretation of CRISPR-Cas-based lateral flow assay test results</div>
+            <div class="pub-meta"><span class="me">M. Xue</span>*, D. Gonzalez*, W. Wang, E. Ospika, X. Gao, P. B. Lillehoj. <em>Ken Kennedy Institute AI in Health Conference</em>.</div>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="pub-year">2023</div>
+          <div>
+            <div class="pub-title">Attenuation correction of fNIRS optic fibers for PET reconstruction on uPMR790 system</div>
+            <div class="pub-meta"><span class="me">M. Xue</span>, Y. Gu, Y. Li, L. Hu, X. Sun. <em>ISMRM Workshop on PET/MRI</em>, 2023; <em>InterfaceRice</em>, 2024.</div>
+          </div>
+        </li>
+      </ol>
+      <p class="pub-meta">* equal contribution</p>
+    </section>
+
+    <section id="education" aria-labelledby="edu-h">
+      <div class="sec-head"><h2 id="edu-h">Education</h2></div>
+      <ul class="edu">
+        <li>
+          <div><span class="where">UT Southwestern Medical Center</span><span class="what">PhD, Biomedical Engineering (Biomedical &amp; Molecular Imaging) &middot; Advisor: Dr. Tarique Hussain</span></div>
+          <span class="when">2025&ndash;present</span>
+        </li>
+        <li>
+          <div><span class="where">Johns Hopkins University</span><span class="what">MSE, Biomedical Engineering (Imaging and Medical Devices)</span></div>
+          <span class="when">2022</span>
+        </li>
+        <li>
+          <div><span class="where">Washington University in St. Louis</span><span class="what">BS, Biomedical Engineering and Financial Engineering, summa cum laude</span></div>
+          <span class="when">2021</span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-h">
+      <div class="sec-head"><h2 id="contact-h">Contact</h2></div>
+      <dl class="contact">
+        <dt>Email</dt><dd><a href="mailto:mengyuan.xue@utsouthwestern.edu">mengyuan.xue@utsouthwestern.edu</a></dd>
+        <dt>GitHub</dt><dd><a href="https://github.com/cc0231">github.com/cc0231</a></dd>
+        <dt>Lab</dt><dd>Pediatric Cardiac MR Imaging Lab (Hussain Lab), Division of Pediatric Cardiology<br>UT Southwestern Medical Center, 5323 Harry Hines Blvd, Dallas, TX 75390</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer>Last updated October 2026</footer>
+</div>
+
+</body>
+</html>
