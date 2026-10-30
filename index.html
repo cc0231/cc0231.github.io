@@ -145,17 +145,25 @@ p { margin: 0; max-width: var(--measure); }
 a.chip { text-decoration: none; color: var(--accent); }
 a.chip:hover { border-color: var(--accent); background: var(--accent-soft); }
 
-.earlier { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
-.earlier .where { font-weight: 500; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; max-width: var(--measure); }
-.earlier .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
-.earlier p { color: var(--muted); font-size: 15px; }
+.earlier { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+.earlier .project h3 { font-size: 17px; }
+.earlier .project-body p { color: var(--muted); font-size: 15.5px; }
 
 .fig { margin: 4px 0 2px; max-width: var(--measure); }
 .fig img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: #fff; border-radius: 2px; }
-.earlier .fig { max-width: 520px; }
 .fig figcaption { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
 
+/* Projects: text on the left, figures on the right */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 32px; align-items: start; }
+.split-text { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.split-figs { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.split-figs .fig { margin: 2px 0 0; max-width: none; }
+.earlier .split { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
+.earlier .split-figs .fig { max-width: none; }
+
 /* About: text on the left, portrait on the right */
+.hello { font-family: var(--font-display); font-weight: 500; font-size: 46px; line-height: 1.12; letter-spacing: -0.015em; margin: 2px 0 -4px; }
+.hello-name { color: var(--accent); }
 .about { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 48px; align-items: start; }
 .about-text { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
 .portrait { position: relative; margin: 4px 0 0; width: 240px; aspect-ratio: 4 / 5; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); overflow: hidden; display: grid; place-items: center; }
@@ -174,6 +182,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
   .nav { gap: 2px 16px; font-size: 14px; }
   section { scroll-margin-top: 120px; }
   .about { grid-template-columns: 1fr; gap: 24px; }
+  .split, .earlier .split { grid-template-columns: 1fr; gap: 18px; }
   .portrait { width: 180px; order: -1; }
 }
 @media (max-width: 520px) {
@@ -181,6 +190,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
   .contact { grid-template-columns: 1fr; gap: 2px; }
   .contact dd { margin-bottom: 10px; }
   .lede { font-size: 19px; }
+  .hello { font-size: 34px; }
 }
 </style>
 </head>
@@ -191,10 +201,10 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
     <nav aria-label="Sections">
       <ul class="nav">
         <li><a href="#about">About</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#earlier">Earlier work</a></li>
         <li><a href="#publications">Publications</a></li>
         <li><a href="#education">Education</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#earlier">Additional projects</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a class="ext" href="MX_Resume_2610.pdf"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>CV</a></li>
         <li><a class="ext" href="https://github.com/cc0231"><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</a></li>
@@ -211,84 +221,13 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
       <div class="about">
       <div class="about-text">
       <p class="role"><strong>PhD student</strong>, Biomedical Engineering &middot; UT Southwestern Medical Center &middot; Pediatric Cardiac MR Imaging Lab &middot; Dallas, TX</p>
+      <h2 class="hello">Hi, I&rsquo;m <span class="hello-name">Mengyuan (Cecilia) Xue</span>.</h2>
       <p class="lede">I build deep learning methods for cardiovascular MRI, from reconstructing accelerated 4D flow scans to segmenting the heart in patients with congenital heart disease.</p>
       <p>I'm a PhD student in Biomedical Engineering at UT Southwestern, advised by <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a> in the Division of Pediatric Cardiology. My current work covers physics-driven unrolled networks for undersampled MRI and label-efficient segmentation of single-ventricle hearts with the SAM2 foundation model. Before UTSW I worked on imaging and machine learning across modalities: smartphone diagnostics and oral cancer screening at Rice University, PET/MR attenuation correction at United Imaging, and CT radiomics at Johns Hopkins. I studied at Washington University in St. Louis and Johns Hopkins University.</p>
       </div>
       <!-- Portrait: save a photo as img/profile.jpg (about 4:5, at least 480x600 px). Until then the "MX" placeholder shows. -->
       <figure class="portrait"><img src="img/profile.jpg" alt="Mengyuan Xue" onerror="this.remove()"></figure>
       </div>
-    </section>
-
-    <section id="research" aria-labelledby="research-h">
-      <div class="sec-head"><h2 id="research-h">Research</h2></div>
-
-      <article class="project">
-        <div class="project-tag">MR reconstruction<br>4D flow</div>
-        <div class="project-body">
-          <h3>Joint supervised and self-supervised training for accelerated 4D flow MRI</h3>
-          <p>In 4D flow MRI the diagnostic signal is the phase difference between velocity encodings, so a reconstruction can look right in magnitude and still get the flow wrong. We extend a per-encoding variational network (FlowVN) with joint supervised and self-supervised training (JSSL) on both magnitude and velocity, plus acquisition-robust and acceleration-conditioned training, so one model covers R = 10&ndash;50 on 1.5 T and 3 T aortic scans.</p>
-          <p>On the CMRx4DFlow 2026 data, compared with a training-matched baseline, it cuts relative velocity error by 38&ndash;50% and angular error by 7.0&ndash;8.7&deg;, and improves every held-out subject at every acceleration. On out-of-distribution data, JSSL raises SSIM by 7.2% and lowers angular and relative error by 38% and 31%.</p>
-          <figure class="fig">
-            <img src="img/flow4d.png" alt="Aortic 4D flow slice: magnitude and velocity magnitude for the fully sampled reference, zero-filled, CS-LLR, baseline and proposed reconstructions. Proposed SSIM 0.956 versus 0.924 for the baseline." loading="lazy">
-            <figcaption>Magnitude (top) and velocity magnitude (bottom) of one aortic slice: reference, zero-filled, CS-LLR, baseline FlowVN and ours.</figcaption>
-          </figure>
-          <div class="chips">
-            <span class="chip status">MICCAI 2026 &middot; CMRx4DFlow</span>
-            <a class="chip" href="https://arxiv.org/abs/2609.38644">arXiv</a>
-            <a class="chip" href="https://papers.miccai.org/miccai-2026-sat/paper/CMRxRecon2026_016.pdf">paper</a>
-            <a class="chip" href="https://github.com/cc0231/FlowVN-JSSL">code</a>
-            <span class="chip">unrolled networks</span>
-          </div>
-        </div>
-      </article>
-      <article class="project">
-        <div class="project-tag">Cardiac segmentation<br>single ventricle</div>
-        <div class="project-body">
-          <h3>SV-MRSeg: detector-prompted SAM2 for label-efficient segmentation of single-ventricle cine CMR</h3>
-          <p>Patients with single-ventricle physiology need surgical palliation and lifelong cardiac MRI, and their anatomy varies too much for networks trained on biventricular hearts. Contouring cine images by hand is slow, and usually only the end-diastolic and end-systolic frames get traced. SV-MRSeg carries SimLVSeg's sparse-label training over to cine CMR, swaps its 3D U-Net for the SAM2 foundation-model encoder, and prompts SAM2 with boxes from a YOLO detector so segmentation runs fully automatically.</p>
-          <p>Trained on 161 patients and tested on 33 held-out patients, it reaches a per-patient Dice of 0.917 against 0.902 for SimLVSeg, with EDV and ESV biases of +0.1 and 0.0 mL against manual contours. Trained on only 8 patients, the SAM2 backbone keeps a Dice of 0.892, while SimLVSeg falls to 0.543.</p>
-          <figure class="fig">
-            <img src="img/svmrseg_qual.png" alt="Short-axis cine test slices with manual contours in light blue and predictions in magenta for SimLVSeg with SSL, the SAM2 baseline and SV-MRSeg at end-diastole and end-systole. Dice ranges from 0.84 to 0.96." loading="lazy">
-            <figcaption>Test slices at the median (top) and 25th-percentile (bottom) SV-MRSeg Dice, at end-diastole (ED) and end-systole (ES). Light blue: manual contour; magenta: prediction; number: Dice.</figcaption>
-          </figure>
-          <figure class="fig">
-            <img src="img/svmrseg.png" alt="Per-patient test Dice versus number of training patients from 8 to 161. SAM2 stays near 0.89 to 0.92 at every size; SimLVSeg drops to 0.54 with 8 patients when trained with two labels per cine and to 0.35 with one." loading="lazy">
-            <figcaption>Test Dice vs number of training patients, with one (single) or two (double) contoured frames per cine.</figcaption>
-          </figure>
-          <div class="chips">
-            <span class="chip status">ISMRM 2027 &middot; submitted</span>
-            <span class="chip">SAM2</span>
-            <span class="chip">YOLO</span>
-            <span class="chip">congenital heart disease</span>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <section id="earlier" aria-labelledby="earlier-h">
-      <div class="sec-head"><h2 id="earlier-h">Earlier work</h2></div>
-      <ul class="earlier">
-        <li>
-          <div class="where">Smartphone reading of CRISPR lateral flow assays <span class="when">Rice University &middot; 2023&ndash;2025</span></div>
-          <p>Segmentation and a lightweight classifier that read CRISPR-Cas13 lateral flow strips from ordinary phone photos (97.7% accuracy on 2,400+ held-out images). <a href="https://doi.org/10.1039/D4SD00314D">paper</a> &middot; <a href="https://github.com/cc0231/CRISPR-Cas13a-LFA-Interpretation">code</a></p>
-        </li>
-        <li>
-          <div class="where">Mobile oral cancer screening (mDOC) <span class="when">Rice University &middot; 2023&ndash;2025</span></div>
-          <p>mDOC is a smartphone device in a 3D-printed case that captures white-light and 405 nm autofluorescence images of the oral cavity. I built lightweight segmentation networks (U-Net with MobileNetV2/V3 encoders) that outline the oral mucosa, and a MobileNetV3 referral classifier on the masked image pairs with Grad-CAM++ attention maps. The whole pipeline runs in an Android app, so a referral decision comes back within 10 minutes of imaging. <a href="https://doi.org/10.1117/12.3034638">SPIE paper</a></p>
-          <figure class="fig">
-            <img src="img/mdoc.jpg" alt="mDOC workflow: a white-light and autofluorescence image pair is resized, masked and cropped to the region of interest, a CNN outputs a refer-to-specialist decision, and an attention map highlights the regions that drove it." loading="lazy">
-            <figcaption>mDOC workflow: image pair &rarr; mucosa masking &rarr; CNN referral decision with an attention map.</figcaption>
-          </figure>
-        </li>
-        <li>
-          <div class="where">fNIRS fiber attenuation correction for PET <span class="when">United Imaging &middot; 2023</span></div>
-          <p>Correction of optical-fiber attenuation for PET reconstruction on a PET/MR/fNIRS system, implemented in C++ for the uPMR790 scanner.</p>
-        </li>
-        <li>
-          <div class="where">Radiomics under varying resolution <span class="when">Johns Hopkins &middot; 2022&ndash;2023</span></div>
-          <p>Predicting and recovering wavelet- and Fourier-domain radiomic features under different blur and noise, validated with simulated and 3D-printed CT phantoms.</p>
-        </li>
-      </ul>
     </section>
 
     <section id="publications" aria-labelledby="pubs-h">
@@ -361,6 +300,135 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
         <li>
           <div><span class="where">Washington University in St. Louis</span><span class="what">BS, Biomedical Engineering and Financial Engineering, summa cum laude</span></div>
           <span class="when">2021</span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="research" aria-labelledby="research-h">
+      <div class="sec-head"><h2 id="research-h">Research</h2></div>
+
+      <article class="project">
+        <div class="project-tag">MR reconstruction<br>4D flow</div>
+        <div class="project-body">
+          <h3>Joint supervised and self-supervised training for accelerated 4D flow MRI</h3>
+          <div class="split">
+            <div class="split-text">
+              <p>In 4D flow MRI the diagnostic signal is the phase difference between velocity encodings, so a reconstruction can look right in magnitude and still get the flow wrong. We extend a per-encoding variational network (FlowVN) with joint supervised and self-supervised training (JSSL) on both magnitude and velocity, plus acquisition-robust and acceleration-conditioned training, so one model covers R = 10&ndash;50 on 1.5 T and 3 T aortic scans.</p>
+              <p>On the CMRx4DFlow 2026 data, compared with a training-matched baseline, it cuts relative velocity error by 38&ndash;50% and angular error by 7.0&ndash;8.7&deg;, and improves every held-out subject at every acceleration. On out-of-distribution data, JSSL raises SSIM by 7.2% and lowers angular and relative error by 38% and 31%.</p>
+              <div class="chips">
+                <span class="chip status">MICCAI 2026 &middot; CMRx4DFlow</span>
+                <a class="chip" href="https://arxiv.org/abs/2609.38644">arXiv</a>
+                <a class="chip" href="https://papers.miccai.org/miccai-2026-sat/paper/CMRxRecon2026_016.pdf">paper</a>
+                <a class="chip" href="https://github.com/cc0231/FlowVN-JSSL">code</a>
+                <span class="chip">unrolled networks</span>
+              </div>
+            </div>
+            <div class="split-figs">
+              <figure class="fig">
+                <img src="img/flow4d.png" alt="Aortic 4D flow slice: magnitude and velocity magnitude for the fully sampled reference, zero-filled, CS-LLR, baseline and proposed reconstructions. Proposed SSIM 0.956 versus 0.924 for the baseline." loading="lazy">
+                <figcaption>Magnitude (top) and velocity magnitude (bottom) of one aortic slice: reference, zero-filled, CS-LLR, baseline FlowVN and ours.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="project">
+        <div class="project-tag">Cardiac segmentation<br>single ventricle</div>
+        <div class="project-body">
+          <h3>SV-MRSeg: detector-prompted SAM2 for label-efficient segmentation of single-ventricle cine CMR</h3>
+          <div class="split">
+            <div class="split-text">
+              <p>Patients with single-ventricle physiology need surgical palliation and lifelong cardiac MRI, and their anatomy varies too much for networks trained on biventricular hearts. Contouring cine images by hand is slow, and usually only the end-diastolic and end-systolic frames get traced. SV-MRSeg carries SimLVSeg's sparse-label training over to cine CMR, swaps its 3D U-Net for the SAM2 foundation-model encoder, and prompts SAM2 with boxes from a YOLO detector so segmentation runs fully automatically.</p>
+              <p>Trained on 161 patients and tested on 33 held-out patients, it reaches a per-patient Dice of 0.917 against 0.902 for SimLVSeg, with EDV and ESV biases of +0.1 and 0.0 mL against manual contours. Trained on only 8 patients, the SAM2 backbone keeps a Dice of 0.892, while SimLVSeg falls to 0.543.</p>
+              <div class="chips">
+                <span class="chip status">ISMRM 2027 &middot; submitted</span>
+                <span class="chip">SAM2</span>
+                <span class="chip">YOLO</span>
+                <span class="chip">congenital heart disease</span>
+              </div>
+            </div>
+            <div class="split-figs">
+              <figure class="fig">
+                <img src="img/svmrseg_qual.png" alt="Short-axis cine test slices with manual contours in light blue and predictions in magenta for SimLVSeg with SSL, the SAM2 baseline and SV-MRSeg at end-diastole and end-systole. Dice ranges from 0.84 to 0.96." loading="lazy">
+                <figcaption>Test slices at the median (top) and 25th-percentile (bottom) SV-MRSeg Dice, at end-diastole (ED) and end-systole (ES). Light blue: manual contour; magenta: prediction; number: Dice.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="project">
+        <div class="project-tag">Point-of-care diagnostics<br>Rice University</div>
+        <div class="project-body">
+          <h3>Smartphone reading of CRISPR-Cas13 lateral flow assays</h3>
+          <p>CRISPR-Cas13 lateral flow strips are cheap, but reading faint test lines by eye is error-prone. I collected 350+ phone photos of 12 lateral flow devices across multiple sites and augmented them into 3,500+ negative and 4,500+ positive strip images. U-Net and MobileNet-based networks segment the strip (95% accuracy across resolutions, contrast and lighting), and ClassNet, a lightweight classifier on the segmentation mask, calls the result: 97.7% accuracy on 2,400+ held-out images, with sensitivity above 98.2% and specificity above 96.5%.</p>
+          <div class="chips">
+            <span class="chip status">Sensors &amp; Diagnostics 2025</span>
+            <a class="chip" href="https://doi.org/10.1039/D4SD00314D">paper</a>
+            <a class="chip" href="https://github.com/cc0231/CRISPR-Cas13a-LFA-Interpretation">code</a>
+            <span class="chip">MobileNet</span>
+          </div>
+        </div>
+      </article>
+      <article class="project">
+        <div class="project-tag">Oral cancer screening<br>Rice University</div>
+        <div class="project-body">
+          <h3>Mobile Detection of Oral Cancer (mDOC)</h3>
+          <div class="split">
+            <div class="split-text">
+              <p>mDOC is a smartphone device in a 3D-printed case that captures white-light and 405 nm autofluorescence images of the oral cavity. I built lightweight segmentation networks (U-Net with MobileNetV2/V3 encoders) that outline the oral mucosa, and a MobileNetV3 referral classifier on the masked image pairs with Grad-CAM++ attention maps. The whole pipeline runs in an Android app, so a referral decision comes back within 10 minutes of imaging.</p>
+              <div class="chips">
+                <span class="chip status">SPIE 2024</span>
+                <a class="chip" href="https://doi.org/10.1117/12.3034638">paper</a>
+                <span class="chip">Android</span>
+                <span class="chip">Grad-CAM++</span>
+              </div>
+            </div>
+            <div class="split-figs">
+              <figure class="fig">
+                <img src="img/mdoc.jpg" alt="mDOC workflow: a white-light and autofluorescence image pair is resized, masked and cropped to the region of interest, a CNN outputs a refer-to-specialist decision, and an attention map highlights the regions that drove it." loading="lazy">
+                <figcaption>mDOC workflow: image pair &rarr; mucosa masking &rarr; CNN referral decision with an attention map.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="project">
+        <div class="project-tag">PET/MR<br>United Imaging</div>
+        <div class="project-body">
+          <h3>Attenuation correction of fNIRS optic fibers for PET reconstruction</h3>
+          <p>On a combined PET/MR/fNIRS system, the fNIRS optical fibers sit in the PET field of view and attenuate photons that the reconstruction does not account for. I developed an image-processing pipeline that corrects this fiber attenuation during PET reconstruction, tested it on human data from 10 volunteers, and reduced the homogeneity deviation on a barrel-source phantom with fibers by 90%. The algorithm was implemented in C++ for the uPMR790 PET/MR scanner.</p>
+          <div class="chips">
+            <span class="chip status">ISMRM Workshop on PET/MRI 2023</span>
+            <span class="chip">C++</span>
+            <span class="chip">uPMR790</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="earlier" aria-labelledby="earlier-h">
+      <div class="sec-head"><h2 id="earlier-h">Additional projects</h2></div>
+      <ul class="earlier">
+        <li class="project">
+          <div class="project-tag">Johns Hopkins<br>2022&ndash;2023</div>
+          <div class="project-body">
+            <h3>Predicting and recovering radiomics under different resolutions</h3>
+            <p>Simulated blur and noise with a cascaded-systems model (170+ combinations of 2D MTF and PSF) and built a framework that recovers wavelet- and Fourier-domain radiomic features, evaluated on 34 features. The deconvolution uses a radiomics- and distance-based objective, extended with an analytical probability density function and linear image transformations.</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">Johns Hopkins<br>2022&ndash;2023</div>
+          <div class="project-body">
+            <h3>Reproducibility of 3D-printed and simulated CT phantoms</h3>
+            <p>Designed five power-law phantoms, printed 12 on FDM printers, scanned them on an in-lab X-ray bench, and compared the reconstructions with simulations through 3D&ndash;3D registration and spectral analysis.</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">WashU (undergraduate)<br>2020</div>
+          <div class="project-body">
+            <h3>Vessel segmentation in mouse-brain photoacoustic images</h3>
+            <p>Trained a U-Net on computer-simulated vessel images and transferred it to real photoacoustic data, and built an automated pipeline that segments and labels the same vessels across time-lapse brain images.</p>
+          </div>
         </li>
       </ul>
     </section>
