@@ -4,23 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mengyuan Xue</title>
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="img/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#10343f">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style>
 /* Layout: fixed identity column on the left (sticky on desktop), reading column on the right; stacks below 820px. */
 :root {
-  --bg: #f5f7f8;
+  --bg: #f7f6f2;
   --surface: #ffffff;
-  --ink: #14212b;
-  --muted: #5a6977;
-  --rule: #d8e0e5;
-  --accent: #0d6b78;
+  --ink: #1a2330;
+  --muted: #5c6773;
+  --rule: #e2e0d9;
+  --accent: #0f6e7b;
+  --accent-soft: #e4f1f2;
   --fill: #fff3cf;
   --fill-ink: #6b5200;
-  --bar: #0d4f59;
+  --bar: #10343f;
   --bar-ink: #ffffff;
-  --bar-muted: #b9d6da;
+  --bar-muted: #a9c6cb;
+  --bar-hi: #7fd6df;
   --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
   --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
@@ -29,37 +36,42 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0e1418;
-    --surface: #141c21;
-    --ink: #e3e9ed;
-    --muted: #94a3af;
-    --rule: #25323b;
-    --accent: #5ec4d0;
+    --bg: #0f1519;
+    --surface: #161e24;
+    --ink: #e4e9ec;
+    --muted: #98a5b0;
+    --rule: #26323a;
+    --accent: #6cc9d4;
+    --accent-soft: #15333a;
     --fill: #3a3112;
     --fill-ink: #f1d98a;
-    --bar: #13343a;
-    --bar-ink: #e3e9ed;
-    --bar-muted: #94b3b8;
+    --bar: #0b2229;
+    --bar-ink: #e4e9ec;
+    --bar-muted: #8fb0b5;
+    --bar-hi: #7fd6df;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0e1418;
-  --surface: #141c21;
-  --ink: #e3e9ed;
-  --muted: #94a3af;
-  --rule: #25323b;
-  --accent: #5ec4d0;
+  --bg: #0f1519;
+  --surface: #161e24;
+  --ink: #e4e9ec;
+  --muted: #98a5b0;
+  --rule: #26323a;
+  --accent: #6cc9d4;
+  --accent-soft: #15333a;
   --fill: #3a3112;
   --fill-ink: #f1d98a;
-  --bar: #13343a;
-  --bar-ink: #e3e9ed;
-  --bar-muted: #94b3b8;
+  --bar: #0b2229;
+  --bar-ink: #e4e9ec;
+  --bar-muted: #8fb0b5;
+  --bar-hi: #7fd6df;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   margin: 0;
   background: var(--bg);
@@ -74,25 +86,30 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 h1, h2, h3 { text-wrap: balance; margin: 0; }
 
 /* Top bar: one solid slab with the name and the section links */
-.topbar { position: sticky; top: 0; z-index: 10; background: var(--bar); color: var(--bar-ink); }
+.topbar { position: sticky; top: 0; z-index: 10; background: var(--bar); color: var(--bar-ink); box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 6px 18px rgba(16,52,63,.10); }
 .topbar-inner { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px 32px; flex-wrap: wrap; }
 .name { font-family: var(--font-display); font-weight: 500; font-size: 26px; line-height: 1.1; letter-spacing: -0.01em; }
 .name a { color: inherit; text-decoration: none; }
 .nav { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 14.5px; }
-.nav a { color: var(--bar-muted); text-decoration: none; }
-.nav a:hover { color: var(--bar-ink); text-decoration: underline; }
+.nav a { color: var(--bar-muted); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; }
+.nav a:hover { color: var(--bar-ink); }
+.nav a.active { color: var(--bar-ink); border-bottom-color: var(--bar-hi); }
 .nav a:focus-visible { outline-color: var(--bar-ink); }
 .nav .ext { color: var(--bar-ink); font-weight: 500; }
+.nav .ext i, .contact i { margin-right: 6px; font-size: 0.95em; }
+.contact i { color: var(--muted); width: 1.1em; text-align: center; }
 
 .page { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 56px; }
 section { scroll-margin-top: 84px; }
+#about { scroll-margin-top: 200px; }
 .role { font-size: 15px; color: var(--muted); line-height: 1.5; margin: 0; }
 .role strong { color: var(--ink); font-weight: 500; }
 
 /* Reading column */
 main { display: flex; flex-direction: column; gap: 56px; min-width: 0; }
 section { display: flex; flex-direction: column; gap: 18px; }
-.sec-head { display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+.sec-head { position: relative; display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+.sec-head::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 44px; height: 2px; background: var(--accent); }
 .sec-head h2 { font-family: var(--font-display); font-weight: 500; font-size: 27px; }
 p { margin: 0; max-width: var(--measure); }
 .lede { font-family: var(--font-display); font-size: 21px; line-height: 1.5; }
@@ -104,7 +121,7 @@ p { margin: 0; max-width: var(--measure); }
 .project h3 { font-size: 18px; font-weight: 600; line-height: 1.35; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
 .chip { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--rule); background: var(--surface); padding: 2px 9px; border-radius: 3px; color: var(--muted); }
-.chip.status { border-color: var(--accent); color: var(--accent); }
+.chip.status { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 .math { font-family: var(--font-mono); font-size: 0.92em; }
 
 .pubs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
@@ -126,7 +143,7 @@ p { margin: 0; max-width: var(--measure); }
 .contact dd { margin: 0; }
 
 a.chip { text-decoration: none; color: var(--accent); }
-a.chip:hover { border-color: var(--accent); }
+a.chip:hover { border-color: var(--accent); background: var(--accent-soft); }
 
 .earlier { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
 .earlier .where { font-weight: 500; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; max-width: var(--measure); }
@@ -137,6 +154,13 @@ a.chip:hover { border-color: var(--accent); }
 .fig img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: #fff; border-radius: 2px; }
 .earlier .fig { max-width: 520px; }
 .fig figcaption { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+
+/* About: text on the left, portrait on the right */
+.about { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 48px; align-items: start; }
+.about-text { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.portrait { position: relative; margin: 4px 0 0; width: 240px; aspect-ratio: 4 / 5; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); overflow: hidden; display: grid; place-items: center; }
+.portrait::before { content: "MX"; font-family: var(--font-display); font-size: 64px; letter-spacing: 0.02em; color: var(--rule); }
+.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* Placeholders the owner still needs to fill in */
 .fill { background: var(--fill); color: var(--fill-ink); padding: 0 4px; border-radius: 2px; font-style: normal; }
@@ -149,6 +173,8 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
   .name { font-size: 23px; }
   .nav { gap: 2px 16px; font-size: 14px; }
   section { scroll-margin-top: 120px; }
+  .about { grid-template-columns: 1fr; gap: 24px; }
+  .portrait { width: 180px; order: -1; }
 }
 @media (max-width: 520px) {
   .project, .pub { grid-template-columns: 1fr; gap: 6px; }
@@ -170,9 +196,9 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
         <li><a href="#publications">Publications</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a class="ext" href="cv.pdf">CV</a></li>
-        <li><a class="ext" href="https://github.com/cc0231">GitHub</a></li>
-        <!-- <li><a class="ext" href="https://scholar.google.com/citations?user=">Scholar</a></li> : add your profile id, then uncomment -->
+        <li><a class="ext" href="MX_Resume_2610.pdf"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>CV</a></li>
+        <li><a class="ext" href="https://github.com/cc0231"><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</a></li>
+        <!-- <li><a class="ext" href="https://scholar.google.com/citations?user="><i class="fa-brands fa-google-scholar" aria-hidden="true"></i>Scholar</a></li> : add your profile id, then uncomment -->
       </ul>
     </nav>
   </div>
@@ -181,11 +207,16 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
 <div class="page">
 
   <main>
-    <section id="about" aria-labelledby="about-h">
-      <div class="sec-head"><h2 id="about-h">About</h2></div>
+    <section id="about" aria-label="About">
+      <div class="about">
+      <div class="about-text">
       <p class="role"><strong>PhD student</strong>, Biomedical Engineering &middot; UT Southwestern Medical Center &middot; Pediatric Cardiac MR Imaging Lab &middot; Dallas, TX</p>
       <p class="lede">I build deep learning methods for cardiovascular MRI, from reconstructing accelerated 4D flow scans to segmenting the heart in patients with congenital heart disease.</p>
       <p>I'm a PhD student in Biomedical Engineering at UT Southwestern, advised by <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a> in the Division of Pediatric Cardiology. My current work covers physics-driven unrolled networks for undersampled MRI and label-efficient segmentation of single-ventricle hearts with the SAM2 foundation model. Before UTSW I worked on imaging and machine learning across modalities: smartphone diagnostics and oral cancer screening at Rice University, PET/MR attenuation correction at United Imaging, and CT radiomics at Johns Hopkins. I studied at Washington University in St. Louis and Johns Hopkins University.</p>
+      </div>
+      <!-- Portrait: save a photo as img/profile.jpg (about 4:5, at least 480x600 px). Until then the "MX" placeholder shows. -->
+      <figure class="portrait"><img src="img/profile.jpg" alt="Mengyuan Xue" onerror="this.remove()"></figure>
+      </div>
     </section>
 
     <section id="research" aria-labelledby="research-h">
@@ -225,7 +256,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
             <figcaption>Test Dice vs number of training patients, with one (single) or two (double) contoured frames per cine.</figcaption>
           </figure>
           <div class="chips">
-            <span class="chip status">ISMRM abstract</span>
+            <span class="chip status">ISMRM 2027 &middot; submitted</span>
             <span class="chip">SAM2</span>
             <span class="chip">YOLO</span>
             <span class="chip">congenital heart disease</span>
@@ -263,6 +294,20 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
     <section id="publications" aria-labelledby="pubs-h">
       <div class="sec-head"><h2 id="pubs-h">Publications</h2></div>
       <ol class="pubs" reversed>
+        <li class="pub">
+          <div class="pub-year">2027</div>
+          <div>
+            <div class="pub-title">SV-MRSeg: Detector-Prompted SAM2 for Label-Efficient Ventricular Segmentation of Single-Ventricle Cine CMR</div>
+            <div class="pub-meta"><span class="me">M. Xue</span>, J. Hu, T. Hussain, Q. Zou. <em>ISMRM 2027</em>, submitted.</div>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="pub-year">2027</div>
+          <div>
+            <div class="pub-title">Model-based myocardial fat fraction estimation from REACT mDIXON</div>
+            <div class="pub-meta">J. Hu, <span class="me">M. Xue</span>, K. Goss, K. L. Chan, T. Hussain, Q. Zou. <em>ISMRM 2027</em>, submitted.</div>
+          </div>
+        </li>
         <li class="pub">
           <div class="pub-year">2026</div>
           <div>
@@ -323,8 +368,8 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
     <section id="contact" aria-labelledby="contact-h">
       <div class="sec-head"><h2 id="contact-h">Contact</h2></div>
       <dl class="contact">
-        <dt>Email</dt><dd><a href="mailto:mengyuan.xue@utsouthwestern.edu">mengyuan.xue@utsouthwestern.edu</a></dd>
-        <dt>GitHub</dt><dd><a href="https://github.com/cc0231">github.com/cc0231</a></dd>
+        <dt>Email</dt><dd><i class="fa-regular fa-envelope" aria-hidden="true"></i><a href="mailto:mengyuan.xue@utsouthwestern.edu">mengyuan.xue@utsouthwestern.edu</a></dd>
+        <dt>GitHub</dt><dd><i class="fa-brands fa-github" aria-hidden="true"></i><a href="https://github.com/cc0231">github.com/cc0231</a></dd>
         <dt>Lab</dt><dd>Pediatric Cardiac MR Imaging Lab (Hussain Lab), Division of Pediatric Cardiology<br>UT Southwestern Medical Center, 5323 Harry Hines Blvd, Dallas, TX 75390</dd>
       </dl>
     </section>
@@ -333,5 +378,29 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
   <footer>Last updated October 2026</footer>
 </div>
 
+<script>
+(function () {
+  var links = {};
+  document.querySelectorAll('.nav a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  var current = null, ticking = false;
+  function update() {
+    ticking = false;
+    var pick = sections[0];
+    var line = window.innerHeight * 0.35;
+    sections.forEach(function (sec) { if (sec.getBoundingClientRect().top <= line) pick = sec; });
+    // at the very bottom the short last section never reaches the line
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) pick = sections[sections.length - 1];
+    var a = links[pick.id];
+    if (a === current) return;
+    if (current) current.classList.remove('active');
+    current = a;
+    if (current) current.classList.add('active');
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
 </body>
 </html>
