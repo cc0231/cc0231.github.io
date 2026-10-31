@@ -8,7 +8,7 @@
 <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="img/favicon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<meta name="theme-color" content="#10343f">
+<meta name="theme-color" content="#14203a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
@@ -25,15 +25,16 @@
   --accent-soft: #e4f1f2;
   --fill: #fff3cf;
   --fill-ink: #6b5200;
-  --bar: #10343f;
+  --bar: #14203a;
   --bar-ink: #ffffff;
-  --bar-muted: #a9c6cb;
+  --bar-muted: #aebbd6;
   --bar-hi: #7fd6df;
   --c-teal: #0f8a96;
   --c-violet: #6a52c4;
   --c-coral: #e0634c;
   --c-amber: #c98a12;
   --c-blue: #2a73d6;
+  --c-green: #2f8a4c;
   --grad: linear-gradient(90deg, #0f8a96 0%, #6a52c4 55%, #e0634c 100%);
   --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
   --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
@@ -59,7 +60,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 h1, h2, h3 { text-wrap: balance; margin: 0; }
 
 /* Top bar: one solid slab with the name and the section links */
-.topbar { position: sticky; top: 0; z-index: 10; background: var(--bar); color: var(--bar-ink); box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 6px 18px rgba(16,52,63,.10); }
+.topbar { position: sticky; top: 0; z-index: 10; background: var(--bar); color: var(--bar-ink); box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 6px 18px rgba(20,32,58,.12); }
 .topbar-inner { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px 32px; flex-wrap: wrap; }
 .name { font-family: var(--font-display); font-weight: 500; font-size: 26px; line-height: 1.1; letter-spacing: -0.01em; }
 .name a { color: inherit; text-decoration: none; }
@@ -119,6 +120,8 @@ p { margin: 0; max-width: var(--measure); }
 .teach .degree { color: var(--muted); font-size: 15px; }
 .teach .degree + .degree { margin-top: -6px; }
 
+.contact-line { font-size: 16px; max-width: none; }
+.contact-line a { white-space: nowrap; }
 .contact { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 16px; font-size: 15.5px; }
 .contact dt { color: var(--muted); font-family: var(--font-mono); font-size: 12.5px; padding-top: 3px; }
 .contact dd { margin: 0; }
@@ -156,7 +159,7 @@ html { background: var(--bg); }
 
 /* Research cards: keywords + figures + chips left, text right */
 .c-teal { --pc: var(--c-teal); } .c-violet { --pc: var(--c-violet); } .c-coral { --pc: var(--c-coral); }
-.c-amber { --pc: var(--c-amber); } .c-blue { --pc: var(--c-blue); }
+.c-amber { --pc: var(--c-amber); } .c-blue { --pc: var(--c-blue); } .c-green { --pc: var(--c-green); }
 #research .project.rcard { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; padding: 26px 28px;
   background: var(--surface); border-radius: 14px; border: 1px solid var(--rule); border-top: 4px solid var(--pc);
   box-shadow: 0 1px 2px rgba(16, 52, 63, .04), 0 10px 28px rgba(16, 52, 63, .06); }
@@ -424,6 +427,24 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
             <p>Patients with single-ventricle physiology need surgical palliation and lifelong cardiac MRI, and their anatomy varies too much for networks trained on biventricular hearts. Contouring cine images by hand is slow, and usually only the end-diastolic and end-systolic frames get traced. SV-MRSeg carries SimLVSeg's sparse-label training over to cine CMR, swaps its 3D U-Net for the SAM2 foundation-model encoder, and prompts SAM2 with boxes from a YOLO detector so segmentation runs fully automatically.</p>
         </div>
       </article>
+      <article class="project rcard c-green">
+        <div class="rcard-side">
+          <div class="project-tag">MR quantification<br>myocardial fat</div>
+              <figure class="fig">
+                <img src="img/react_mff.png" alt="Two example subjects, mid-ventricular slice: water image with the tracked septal ROI and blood-pool control, the scanner fat fraction F/(W+F) with septum medians of 9.1% and 12.7%, and the proposed pipeline's fat fraction with septum medians of 2.8% and 6.3%." loading="lazy">
+                <figcaption>Two example subjects: water image with the tracked septal ROI (red), the scanner fat fraction, and the corrected fat fraction from the proposed pipeline (display 0&ndash;20%).</figcaption>
+              </figure>
+          <div class="chips">
+            <span class="chip status">ISMRM 2027 &middot; submitted</span>
+          </div>
+        </div>
+        <div class="rcard-main">
+          <h3>Model-based myocardial fat fraction estimation from REACT mDIXON</h3>
+            <p class="keywords">fat&ndash;water imaging &middot; mDIXON &middot; &sup1;H-MRS</p>
+            <p>Myocardial fat is an early marker of cardiometabolic disease, but its reference measurement, septal &sup1;H-MRS, is single-voxel and not widely available. This project estimates myocardial fat fraction from REACT, a free-breathing whole-heart mDIXON scan that is often already acquired for angiography, so it needs no extra scan time. The algorithm corrects fat&ndash;water swaps, T2* decay, Rician noise and T2-prep/inversion weighting, then tracks a septal ROI automatically.</p>
+            <p>In three water&ndash;fat phantoms the estimates agreed with &sup1;H-MRS (R&sup2; = 0.997), and in 19 subjects the correction brought septal fat fraction from 11.9% down to 1.9%, into the physiological range.</p>
+        </div>
+      </article>
       <article class="project rcard c-teal">
         <div class="rcard-side">
           <div class="project-tag">MR reconstruction<br>4D flow</div>
@@ -551,22 +572,30 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
               <div class="project-tag">08/2022&ndash;05/2023<br>Johns Hopkins</div>
               <div class="project-body">
                 <h3>Graduate Teaching Assistant</h3>
-                <p class="degree">Biomedical Data Science Laboratory (580.475/477), Dr. Brian Caffo</p>
-                <p class="degree">Physiology for Applied Biomedical Engineering I (585.601), Dr. Caitlin Torgerson</p>
+                <p class="degree">Biomedical Data Science Laboratory (580.475/477)</p>
+                <p class="degree">Physiology for Applied Biomedical Engineering I (585.601)</p>
               </div>
             </li>
             <li class="project">
               <div class="project-tag">08/2019&ndash;05/2021<br>WashU</div>
               <div class="project-body">
                 <h3>Undergraduate Teaching Assistant</h3>
-                <p class="degree">Introduction to Biomedical Engineering (BME 140) &middot; Bioengineering Thermodynamics (BME 320) &middot; Introduction to Computer Science (CSE 131) &middot; Introduction to Data Science (CSE 217) &middot; Data Structures and Algorithms (CSE 247) &middot; Introduction to Machine Learning (CSE 417)</p>
+                <p class="degree">Introduction to Biomedical Engineering (BME 140)</p>
+            <p class="degree">Bioengineering Thermodynamics (BME 320)</p>
+            <p class="degree">Introduction to Computer Science (CSE 131)</p>
+            <p class="degree">Introduction to Data Science (CSE 217)</p>
+            <p class="degree">Data Structures and Algorithms (CSE 247)</p>
+            <p class="degree">Introduction to Machine Learning (CSE 417)</p>
               </div>
             </li>
             <li class="project">
               <div class="project-tag">08/2018&ndash;05/2021<br>WashU</div>
               <div class="project-body">
                 <h3>Grader</h3>
-                <p class="degree">Lead grader for Differential Equations (Math 217) and Foundations for Higher Mathematics (Math 310); grader for Mathematics in Physical Science (Math 308) and Probability (Math 493)</p>
+                <p class="degree">Lead grader, Differential Equations (Math 217)</p>
+                <p class="degree">Lead grader, Foundations for Higher Mathematics (Math 310)</p>
+                <p class="degree">Grader, Mathematics in Physical Science (Math 308)</p>
+                <p class="degree">Grader, Probability (Math 493)</p>
               </div>
             </li>
           </ul>
@@ -575,14 +604,23 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
           <h3 class="subhead">Service</h3>
           <ul class="edu teach">
             <li class="project">
-              <div class="project-tag">07/2024&ndash;present<br>Rice University</div>
+              <div class="project-tag">2018&ndash;2021<br>WashU</div>
               <div class="project-body">
-                <h3>Secretary</h3>
-                <p class="degree">Rice University Chinese Students and Scholars Association</p>
+                <h3>Honor Society Memberships</h3>
+                <p class="degree">Tau Beta Pi (Engineering Honor Society)</p>
+                <p class="degree">Alpha Eta Mu Beta (Biomedical Engineering Honor Society)</p>
+                <p class="degree">Biomedical Engineering Society (BMES), student member</p>
               </div>
             </li>
             <li class="project">
-              <div class="project-tag">10/2022&ndash;present<br>WashU</div>
+              <div class="project-tag">07/2024&ndash;05/2025<br>Rice University</div>
+              <div class="project-body">
+                <h3>Secretary</h3>
+                <p class="degree">Rice University Chinese Students and Scholars Association (Rice CSSA)</p>
+              </div>
+            </li>
+            <li class="project">
+              <div class="project-tag">10/2022&ndash;05/2025<br>WashU</div>
               <div class="project-body">
                 <h3>Alumni Interviewer</h3>
                 <p class="degree">WUSTL Alumni and Parents Admission Program</p>
@@ -598,22 +636,18 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
             <li class="project">
               <div class="project-tag">06/2020&ndash;08/2020<br>Learning Lodge</div>
               <div class="project-body">
-                <h3>Volunteer Mathematics Tutor</h3>
-                <p class="degree">Free online tutoring for an eighth-grade student</p>
+                <h3>K-9 Mathematics Tutor</h3>
               </div>
             </li>
             <li class="project">
               <div class="project-tag">2018&ndash;2019<br>WashU</div>
               <div class="project-body">
                 <h3>Student Leadership</h3>
-                <p class="degree">Bear Leader, Make Your Impact program (2019) &middot; International Student Orientation leader (2018) &middot; Peer mentor, International Summer Study Program (2018&ndash;2019) &middot; Chemistry Tournament logistics committee (2018&ndash;2019) &middot; Celebration Days overnight host (2018)</p>
-              </div>
-            </li>
-            <li class="project">
-              <div class="project-tag">2018&ndash;2021<br>WashU</div>
-              <div class="project-body">
-                <h3>Honor Society Memberships</h3>
-                <p class="degree">Tau Beta Pi (Engineering Honor Society) &middot; Alpha Eta Mu Beta (Biomedical Engineering Honor Society) &middot; Biomedical Engineering Society (BMES), student member</p>
+                <p class="degree">Bear Leader, Make Your Impact program (2019)</p>
+                <p class="degree">International Student Orientation leader (2018)</p>
+                <p class="degree">Peer mentor, International Summer Study Program (2018&ndash;2019)</p>
+                <p class="degree">Chemistry Tournament logistics committee (2018&ndash;2019)</p>
+                <p class="degree">Celebration Days overnight host (2018)</p>
               </div>
             </li>
           </ul>
@@ -623,9 +657,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
 
     <section id="contact" aria-labelledby="contact-h">
       <div class="sec-head"><h2 id="contact-h">Contact</h2></div>
-      <dl class="contact">
-        <dt>Email</dt><dd><i class="fa-regular fa-envelope" aria-hidden="true"></i><a href="mailto:mengyuan.xue@utsouthwestern.edu">mengyuan.xue@utsouthwestern.edu</a></dd>
-      </dl>
+      <p class="contact-line">For research inquiries and collaborations, please contact me at <a href="mailto:mengyuan.xue@utsouthwestern.edu">mengyuan.xue@utsouthwestern.edu</a>.</p>
     </section>
   </main>
 
