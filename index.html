@@ -209,6 +209,21 @@ html { background: var(--bg); }
 .mini h3 { font-size: 15px; font-weight: 600; line-height: 1.35; }
 .mini p { font-size: 13.5px; line-height: 1.5; color: var(--muted); }
 
+/* Research links vs keywords */
+.rcard a.chip.link { background: var(--pc); border-color: var(--pc); color: #fff; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; padding: 3px 11px; }
+.rcard a.chip.link:hover { background: color-mix(in srgb, var(--pc) 82%, #000); border-color: color-mix(in srgb, var(--pc) 82%, #000); color: #fff; }
+.rcard a.chip.link i { font-size: 0.95em; }
+.keywords { margin: -6px 0 2px; color: var(--pc); font-family: var(--font-mono); font-size: 12px; letter-spacing: .02em; font-size: 13.5px; color: var(--muted); max-width: none; }
+
+/* Additional projects: click to enlarge */
+.mini-img a.zoom { position: absolute; inset: 0; display: block; cursor: zoom-in; }
+.mini-img a.zoom img { transition: transform .2s ease; }
+.mini-img a.zoom:hover img { transform: scale(1.03); }
+.lightbox { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; padding: 4vh 4vw;
+  background: rgba(10, 18, 24, .86); cursor: zoom-out; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 92vw; max-height: 88vh; background: #fff; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+
 /* About: text on the left, portrait on the right */
 .hello { font-family: var(--font-display); font-weight: 500; font-size: 46px; line-height: 1.12; letter-spacing: -0.015em; margin: 2px 0 -4px; }
 .about { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 48px; align-items: start; }
@@ -216,6 +231,20 @@ html { background: var(--bg); }
 .portrait { position: relative; margin: 4px 0 0; width: 240px; aspect-ratio: 4 / 5; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); overflow: hidden; display: grid; place-items: center; }
 .portrait::before { content: "MX"; font-family: var(--font-display); font-size: 64px; letter-spacing: 0.02em; color: var(--rule); }
 .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.cv-line { margin-top: -6px; }
+.cv-link { display: inline-flex; align-items: center; gap: 5px; margin-left: 0; padding: 1px 9px; border: 1px solid var(--accent);
+  border-radius: 999px; font-size: 13.5px; font-weight: 600; text-decoration: none; white-space: nowrap; vertical-align: 1px; }
+.cv-link:hover { background: var(--accent); color: #fff; }
+
+/* Places strip under the intro */
+.places { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.places:empty { display: none; }
+.places li { width: 120px; display: flex; flex-direction: column; gap: 5px; }
+.places a.zoom { display: block; aspect-ratio: 1; border-radius: 10px; overflow: hidden; cursor: zoom-in; box-shadow: 0 2px 8px rgba(16,52,63,.10); }
+.places img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
+.places a.zoom:hover img { transform: scale(1.05); }
+.places span { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); text-align: center; white-space: nowrap; letter-spacing: -.01em; }
 
 /* Placeholders the owner still needs to fill in */
 .fill { background: var(--fill); color: var(--fill-ink); padding: 0 4px; border-radius: 2px; font-style: normal; }
@@ -274,7 +303,14 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
       <p class="role"><strong>PhD student</strong>, Biomedical Engineering &middot; UT Southwestern Medical Center &middot; Pediatric Cardiac MR Imaging Lab &middot; Dallas, TX</p>
       <h2 class="hello">Hi, I&rsquo;m <span class="hello-name">Mengyuan (Cecilia) Xue</span>.</h2>
       <p class="lede">I build deep learning methods for cardiovascular MRI, from reconstructing accelerated 4D flow scans to segmenting the heart in patients with congenital heart disease.</p>
-      <p>I'm a PhD student in Biomedical Engineering at UT Southwestern, advised by <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a> in the Division of Pediatric Cardiology. My current work covers physics-driven unrolled networks for undersampled MRI and label-efficient segmentation of single-ventricle hearts with the SAM2 foundation model. Before UTSW I worked on imaging and machine learning across modalities: smartphone diagnostics and oral cancer screening at Rice University, PET/MR attenuation correction at United Imaging, and CT radiomics at Johns Hopkins. I studied at Washington University in St. Louis and Johns Hopkins University.</p>
+      <p>I'm a PhD student in Biomedical Engineering at UT Southwestern, advised by <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a> in the Division of Pediatric Cardiology. My current work covers developing data-efficient foundation-model-based segmentation algorithms targeting single ventricle physiology. Before moving to Dallas, I've worked on medical imaging and computational research across multiple modalities: smartphone diagnostics and oral cancer prediction; PET/MR attenuation correction; CT radiomics recovery and 3D-printed phantom reproducibility analysis etc.</p>
+      <p class="cv-line"><a class="cv-link" href="MX_Resume_2610.pdf" title="Download my CV (PDF)"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>CV</a></p>
+      <ul class="places" aria-label="Places I have lived">
+        <li><a class="zoom" href="places/stlouis.jpg" aria-label="St. Louis"><img src="places/stlouis.jpg" alt="St. Louis" loading="lazy" onerror="this.closest('li').remove()"></a><span>St. Louis &middot; 2017&ndash;21</span></li>
+        <li><a class="zoom" href="places/baltimore.jpg" aria-label="Baltimore"><img src="places/baltimore.jpg" alt="Baltimore" loading="lazy" onerror="this.closest('li').remove()"></a><span>Baltimore &middot; 2021&ndash;22</span></li>
+        <li><a class="zoom" href="places/houston.jpg" aria-label="Houston"><img src="places/houston.jpg" alt="Houston" loading="lazy" onerror="this.closest('li').remove()"></a><span>Houston &middot; 2023&ndash;25</span></li>
+        <li><a class="zoom" href="places/dallas.jpg" aria-label="Dallas"><img src="places/dallas.jpg" alt="Dallas" loading="lazy" onerror="this.closest('li').remove()"></a><span>Dallas &middot; 2025&ndash;</span></li>
+      </ul>
       </div>
       <!-- Portrait: save a photo as img/profile.jpg (about 4:5, at least 480x600 px). Until then the "MX" placeholder shows. -->
       <figure class="portrait"><img src="img/profile.jpg" alt="Mengyuan Xue" onerror="this.remove()"></figure>
@@ -316,7 +352,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
           <div class="pub-year">2024</div>
           <div>
             <div class="pub-title"><a href="https://doi.org/10.1117/12.3034638">A deep learning mucosal segmentation algorithm for a mobile Detection of Oral Cancer (mDOC) platform</a></div>
-            <div class="pub-meta"><span class="me">Mengyuan Xue</span>, Ruchika Mitbander, Jennifer Carns, Richard A. Schwarz, Nadarajah Vigneswaran, Ann Gillenwater, Rebecca Richards-Kortum. <em>Proc. SPIE 13186, Translational Biophotonics</em>.</div>
+            <div class="pub-meta"><span class="me">Mengyuan Xue</span>, Ruchika Mitbander, Jennifer Carns, Richard A. Schwarz, Nadarajah Vigneswaran, Ann Gillenwater, Rebecca Richards-Kortum. <em>Proc. SPIE 13186, SPIE Translational Biophotonics + Additive Manufacturing for Photonics</em>, 2024.</div>
           </div>
         </li>
         <li class="pub">
@@ -345,6 +381,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
           <div class="project-body">
             <h3>UT Southwestern Medical Center</h3>
             <p class="degree">PhD in Biomedical Engineering</p>
+            <p class="degree minor">Concentration: Biomedical and Molecular Imaging</p>
           </div>
         </li>
         <li class="project">
@@ -352,6 +389,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
           <div class="project-body">
             <h3>Johns Hopkins University</h3>
             <p class="degree">MSE in Biomedical Engineering</p>
+            <p class="degree minor">Concentration: Imaging &amp; Medical Devices</p>
           </div>
         </li>
         <li class="project">
@@ -375,14 +413,12 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
                 <figcaption>Test slices at the median (top) and 25th-percentile (bottom) SV-MRSeg Dice, at end-diastole (ED) and end-systole (ES). Light blue: manual contour; magenta: prediction; number: Dice.</figcaption>
               </figure>
           <div class="chips">
-                <span class="chip status">ISMRM 2027 &middot; submitted</span>
-                <span class="chip">SAM2</span>
-                <span class="chip">YOLO</span>
-                <span class="chip">congenital heart disease</span>
+            <span class="chip status">ISMRM 2027 &middot; submitted</span>
           </div>
         </div>
         <div class="rcard-main">
           <h3>SV-MRSeg: detector-prompted SAM2 for label-efficient segmentation of single-ventricle cine CMR</h3>
+            <p class="keywords">SAM2 &middot; YOLO &middot; congenital heart disease</p>
             <p>Patients with single-ventricle physiology need surgical palliation and lifelong cardiac MRI, and their anatomy varies too much for networks trained on biventricular hearts. Contouring cine images by hand is slow, and usually only the end-diastolic and end-systolic frames get traced. SV-MRSeg carries SimLVSeg's sparse-label training over to cine CMR, swaps its 3D U-Net for the SAM2 foundation-model encoder, and prompts SAM2 with boxes from a YOLO detector so segmentation runs fully automatically.</p>
         </div>
       </article>
@@ -394,15 +430,15 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
                 <figcaption>Magnitude (top) and velocity (bottom) of one aortic slice: reference, training-matched baseline, and ours. The baseline washes out the high-velocity jet; ours keeps it.</figcaption>
               </figure>
           <div class="chips">
-                <span class="chip status">MICCAI 2026 &middot; CMRx4DFlow</span>
-                <a class="chip" href="https://arxiv.org/abs/2609.38644">arXiv</a>
-                <a class="chip" href="https://papers.miccai.org/miccai-2026-sat/paper/CMRxRecon2026_016.pdf">paper</a>
-                <a class="chip" href="https://github.com/cc0231/FlowVN-JSSL">code</a>
-                <span class="chip">unrolled networks</span>
+            <span class="chip status">MICCAI 2026 &middot; CMRx4DFlow</span>
+            <a class="chip link" href="https://arxiv.org/abs/2609.38644"><i class="fa-solid fa-book-open" aria-hidden="true"></i>arXiv</a>
+            <a class="chip link" href="https://papers.miccai.org/miccai-2026-sat/paper/CMRxRecon2026_016.pdf"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>paper</a>
+            <a class="chip link" href="https://github.com/cc0231/FlowVN-JSSL"><i class="fa-brands fa-github" aria-hidden="true"></i>code</a>
           </div>
         </div>
         <div class="rcard-main">
           <h3>Joint supervised and self-supervised training for accelerated 4D flow MRI</h3>
+            <p class="keywords">unrolled networks</p>
             <p>In 4D flow MRI the diagnostic signal is the phase difference between velocity encodings, so a reconstruction can look right in magnitude and still get the flow wrong. We extend a per-encoding variational network (FlowVN) with joint supervised and self-supervised training (JSSL) on both magnitude and velocity, plus acquisition-robust and acceleration-conditioned training, so one model covers R = 10&ndash;50 on 1.5 T and 3 T aortic scans.</p>
             <p>On the CMRx4DFlow 2026 data, compared with a training-matched baseline, it cuts relative velocity error by 38&ndash;50% and angular error by 7.0&ndash;8.7&deg;, and improves every held-out subject at every acceleration. On out-of-distribution data, JSSL raises SSIM by 7.2% and lowers angular and relative error by 38% and 31%.</p>
         </div>
@@ -415,14 +451,14 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
                 <figcaption>Graphical abstract: a phone photo of the CRISPR-Cas strip goes to the trained networks, which call it positive or negative.</figcaption>
               </figure>
           <div class="chips">
-                <span class="chip status">Sensors &amp; Diagnostics 2025</span>
-                <a class="chip" href="https://doi.org/10.1039/D4SD00314D">paper</a>
-                <a class="chip" href="https://github.com/cc0231/CRISPR-Cas13a-LFA-Interpretation">code</a>
-                <span class="chip">MobileNet</span>
+            <span class="chip status">Sensors &amp; Diagnostics 2025</span>
+            <a class="chip link" href="https://doi.org/10.1039/D4SD00314D"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>paper</a>
+            <a class="chip link" href="https://github.com/cc0231/CRISPR-Cas13a-LFA-Interpretation"><i class="fa-brands fa-github" aria-hidden="true"></i>code</a>
           </div>
         </div>
         <div class="rcard-main">
           <h3>Smartphone reading of CRISPR-Cas13 lateral flow assays</h3>
+            <p class="keywords">MobileNet</p>
             <p>CRISPR-Cas13 lateral flow strips are cheap, but reading faint test lines by eye is error-prone. I collected 350+ phone photos of 12 lateral flow devices across multiple sites and augmented them into 3,500+ negative and 4,500+ positive strip images. U-Net and MobileNet-based networks segment the strip (95% accuracy across resolutions, contrast and lighting), and ClassNet, a lightweight classifier on the segmentation mask, calls the result: 97.7% accuracy on 2,400+ held-out images, with sensitivity above 98.2% and specificity above 96.5%.</p>
         </div>
       </article>
@@ -434,14 +470,13 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
                 <figcaption>mDOC workflow: image pair &rarr; mucosa masking &rarr; CNN referral decision with an attention map.</figcaption>
               </figure>
           <div class="chips">
-                <span class="chip status">SPIE 2024</span>
-                <a class="chip" href="https://doi.org/10.1117/12.3034638">paper</a>
-                <span class="chip">Android</span>
-                <span class="chip">Grad-CAM++</span>
+            <span class="chip status">SPIE Translational Biophotonics 2024</span>
+            <a class="chip link" href="https://doi.org/10.1117/12.3034638"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>paper</a>
           </div>
         </div>
         <div class="rcard-main">
           <h3>Mobile Detection of Oral Cancer (mDOC)</h3>
+            <p class="keywords">Android &middot; Grad-CAM++</p>
             <p>mDOC is a smartphone device in a 3D-printed case that captures white-light and 405 nm autofluorescence images of the oral cavity. I built lightweight segmentation networks (U-Net with MobileNetV2/V3 encoders) that outline the oral mucosa, and a MobileNetV3 referral classifier on the masked image pairs with Grad-CAM++ attention maps. The whole pipeline runs in an Android app, so a referral decision comes back within 10 minutes of imaging.</p>
         </div>
       </article>
@@ -453,14 +488,13 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
                 <figcaption>PET homogeneity across slices before (left) and after (right) the fiber correction: the fNIRS curve (yellow) drops back onto the barrel-source and PET-only curves.</figcaption>
               </figure>
           <div class="chips">
-                <span class="chip status">ISMRM Workshop on PET/MRI 2023</span>
-                <a class="chip" href="https://www.ismrm.org/workshops/2023/PET-MRI/posters.htm">poster 16</a>
-                <span class="chip">C++</span>
-                <span class="chip">uPMR790</span>
+            <span class="chip status">ISMRM Workshop on PET/MRI 2023</span>
+            <a class="chip link" href="https://www.ismrm.org/workshops/2023/PET-MRI/posters.htm"><i class="fa-regular fa-image" aria-hidden="true"></i>poster 16</a>
           </div>
         </div>
         <div class="rcard-main">
           <h3>Attenuation correction of fNIRS optic fibers for PET reconstruction</h3>
+            <p class="keywords">C++ &middot; uPMR790</p>
             <p>On a combined PET/MR/fNIRS system, the fNIRS optical fibers sit in the PET field of view and attenuate photons that the reconstruction does not account for. I developed an image-processing pipeline that corrects this fiber attenuation during PET reconstruction, tested it on human data from 10 volunteers, and reduced the homogeneity deviation on a barrel-source phantom with fibers by 90%. The algorithm was implemented in C++ for the uPMR790 PET/MR scanner.</p>
         </div>
       </article>
@@ -471,7 +505,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
       <!-- Images: save as img/proj-radiomics.jpg, img/proj-phantom.jpg, img/proj-vessels.jpg (any size, about 4:3). Cards hide the image area until the file exists. -->
       <ul class="mini-grid">
         <li class="mini c-violet">
-          <figure class="mini-img"><img src="img/proj-radiomics.jpg" alt="Radiomics recovery across resolutions" loading="lazy" onerror="this.parentNode.remove()"></figure>
+          <figure class="mini-img"><a class="zoom" href="img/proj-radiomics.jpg" aria-label="Open full-size image: Radiomics recovery across resolutions"><img src="img/proj-radiomics.jpg" alt="Radiomics recovery across resolutions" loading="lazy" onerror="this.closest(\'figure\').remove()"></a></figure>
           <div class="mini-body">
             <div class="mini-meta">Johns Hopkins &middot; 2022&ndash;2023</div>
             <h3>Radiomics recovery across resolutions</h3>
@@ -479,7 +513,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
           </div>
         </li>
         <li class="mini c-teal">
-          <figure class="mini-img"><img src="img/proj-phantom.jpg" alt="3D-printed CT phantoms" loading="lazy" onerror="this.parentNode.remove()"></figure>
+          <figure class="mini-img"><a class="zoom" href="img/proj-phantom.jpg" aria-label="Open full-size image: 3D-printed CT phantoms"><img src="img/proj-phantom.jpg" alt="3D-printed CT phantoms" loading="lazy" onerror="this.closest(\'figure\').remove()"></a></figure>
           <div class="mini-body">
             <div class="mini-meta">Johns Hopkins &middot; 2022&ndash;2023</div>
             <h3>3D-printed CT phantoms</h3>
@@ -487,7 +521,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
           </div>
         </li>
         <li class="mini c-amber">
-          <figure class="mini-img"><img src="img/proj-oxygen.png" alt="3D plot of a single capillary discretized into points along its axis inside a 10 by 10 by 10 grid of tissue points" loading="lazy" onerror="this.parentNode.remove()"></figure>
+          <figure class="mini-img"><a class="zoom" href="img/proj-oxygen.png" aria-label="Open full-size image: 3D plot of a single capillary discretized into points along its axis inside a 10 by 10 by 10 grid of tissue points"><img src="img/proj-oxygen.png" alt="3D plot of a single capillary discretized into points along its axis inside a 10 by 10 by 10 grid of tissue points" loading="lazy" onerror="this.closest(\'figure\').remove()"></a></figure>
           <div class="mini-body">
             <div class="mini-meta">Johns Hopkins &middot; 2022</div>
             <h3>Oxygen transport in capillary networks</h3>
@@ -495,11 +529,11 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
           </div>
         </li>
         <li class="mini c-coral">
-          <figure class="mini-img"><img src="img/proj-vessels.jpg" alt="Photoacoustic vessel segmentation" loading="lazy" onerror="this.parentNode.remove()"></figure>
+          <figure class="mini-img"><a class="zoom" href="img/proj-vessels.jpg" aria-label="Open full-size image: Photoacoustic vessel segmentation"><img src="img/proj-vessels.jpg" alt="Photoacoustic vessel segmentation" loading="lazy" onerror="this.closest(\'figure\').remove()"></a></figure>
           <div class="mini-body">
             <div class="mini-meta">WashU &middot; 2020</div>
             <h3>Photoacoustic vessel segmentation</h3>
-            <p>U-Net vessel segmentation in mouse-brain photoacoustic images.</p>
+            <p>Automated vessel segmentation of mouse-brain photoacoustic images.</p>
           </div>
         </li>
       </ul>
@@ -526,9 +560,50 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
         <li class="project">
           <div class="project-tag">08/2018&ndash;05/2021<br>WashU</div>
           <div class="project-body">
-            <h3>Grader and Engineering Tutor</h3>
+            <h3>Grader</h3>
             <p class="degree">Lead grader for Differential Equations (Math 217) and Foundations for Higher Mathematics (Math 310); grader for Mathematics in Physical Science (Math 308) and Probability (Math 493)</p>
-            <p class="degree">Tutored 20+ engineering students, 7&ndash;10 hours a week</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">10/2022&ndash;present<br>WashU</div>
+          <div class="project-body">
+            <h3>Alumni Interviewer</h3>
+            <p class="degree">WUSTL Alumni and Parents Admission Program</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">04/2021&ndash;06/2022<br>Johns Hopkins</div>
+          <div class="project-body">
+            <h3>Secretary</h3>
+            <p class="degree">JHU Chinese Students and Scholars Association (JHUCSSA)</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">07/2024&ndash;present<br>Rice University</div>
+          <div class="project-body">
+            <h3>Member</h3>
+            <p class="degree">Rice University Chinese Students and Scholars Association</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">06/2020&ndash;08/2020<br>Learning Lodge</div>
+          <div class="project-body">
+            <h3>Volunteer Mathematics Tutor</h3>
+            <p class="degree">Free online tutoring for an eighth-grade student</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">2018&ndash;2019<br>WashU</div>
+          <div class="project-body">
+            <h3>Student Leadership</h3>
+            <p class="degree">Bear Leader, Make Your Impact program (2019) &middot; International Student Orientation leader (2018) &middot; Peer mentor, International Summer Study Program (2018&ndash;2019) &middot; Chemistry Tournament logistics committee (2018&ndash;2019) &middot; Celebration Days overnight host (2018)</p>
+          </div>
+        </li>
+        <li class="project">
+          <div class="project-tag">2018&ndash;2021<br>WashU</div>
+          <div class="project-body">
+            <h3>Honor Society Memberships</h3>
+            <p class="degree">Tau Beta Pi (Engineering Honor Society) &middot; Alpha Eta Mu Beta (Biomedical Engineering Honor Society) &middot; Biomedical Engineering Society (BMES), student member</p>
           </div>
         </li>
       </ul>
@@ -538,8 +613,6 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
       <div class="sec-head"><h2 id="contact-h">Contact</h2></div>
       <dl class="contact">
         <dt>Email</dt><dd><i class="fa-regular fa-envelope" aria-hidden="true"></i><a href="mailto:mengyuan.xue@utsouthwestern.edu">mengyuan.xue@utsouthwestern.edu</a></dd>
-        <dt>GitHub</dt><dd><i class="fa-brands fa-github" aria-hidden="true"></i><a href="https://github.com/cc0231">github.com/cc0231</a></dd>
-        <dt>Lab</dt><dd>Pediatric Cardiac MR Imaging Lab (Hussain Lab), Division of Pediatric Cardiology<br>UT Southwestern Medical Center, 5323 Harry Hines Blvd, Dallas, TX 75390</dd>
       </dl>
     </section>
   </main>
@@ -570,6 +643,29 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
   window.addEventListener('resize', update);
   update();
 })();
+</script>
+<script>
+(function () {
+  var box = document.createElement('div');
+  box.className = 'lightbox'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true');
+  var big = document.createElement('img'); box.appendChild(big); document.body.appendChild(box);
+  function close() { box.classList.remove('open'); big.removeAttribute('src'); }
+  document.querySelectorAll('a.zoom').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      big.src = a.getAttribute('href'); big.alt = (a.querySelector('img') || {}).alt || '';
+      box.classList.add('open');
+    });
+  });
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
+</script>
+<script>
+window.addEventListener('load', function () {
+  var ul = document.querySelector('.places');
+  if (ul && !ul.querySelector('li')) ul.style.display = 'none';
+});
 </script>
 </body>
 </html>
