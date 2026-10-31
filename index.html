@@ -384,7 +384,6 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
         <div class="rcard-main">
           <h3>SV-MRSeg: detector-prompted SAM2 for label-efficient segmentation of single-ventricle cine CMR</h3>
             <p>Patients with single-ventricle physiology need surgical palliation and lifelong cardiac MRI, and their anatomy varies too much for networks trained on biventricular hearts. Contouring cine images by hand is slow, and usually only the end-diastolic and end-systolic frames get traced. SV-MRSeg carries SimLVSeg's sparse-label training over to cine CMR, swaps its 3D U-Net for the SAM2 foundation-model encoder, and prompts SAM2 with boxes from a YOLO detector so segmentation runs fully automatically.</p>
-            <p>Trained on 161 patients and tested on 33 held-out patients, it reaches a per-patient Dice of 0.917 against 0.902 for SimLVSeg, with EDV and ESV biases of +0.1 and 0.0 mL against manual contours. Trained on only 8 patients, the SAM2 backbone keeps a Dice of 0.892, while SimLVSeg falls to 0.543.</p>
         </div>
       </article>
       <article class="project rcard c-teal">
