@@ -96,7 +96,7 @@ h1, h2, h3 { text-wrap: balance; margin: 0; }
 .topbar-inner { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px 32px; flex-wrap: wrap; }
 .name { font-family: var(--font-display); font-weight: 500; font-size: 26px; line-height: 1.1; letter-spacing: -0.01em; }
 .name a { color: inherit; text-decoration: none; }
-.nav { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 14.5px; }
+.nav { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
 .nav a { color: var(--bar-muted); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; }
 .nav a:hover { color: var(--bar-ink); }
 .nav a.active { color: var(--bar-ink); border-bottom-color: var(--bar-hi); }
@@ -108,7 +108,10 @@ h1, h2, h3 { text-wrap: balance; margin: 0; }
 .page { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 56px; }
 section { scroll-margin-top: 84px; }
 #about { scroll-margin-top: 200px; }
-.role { font-size: 15px; color: var(--muted); line-height: 1.5; margin: 0; }
+.role { font-size: 15px; color: var(--muted); line-height: 1.5; margin: 0; max-width: none; }
+.hobbies { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: -12px 0 0; font-size: 14px; color: var(--muted); max-width: none; }
+.hobbies span { display: inline-flex; align-items: center; gap: 6px; }
+.hobbies i { color: var(--accent); font-size: 0.95em; }
 .role strong { color: var(--ink); font-weight: 500; }
 
 /* Reading column */
@@ -141,6 +144,11 @@ p { margin: 0; max-width: var(--measure); }
 .edu { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
 .edu .degree { font-size: 15.5px; color: var(--ink); }
 .edu .degree.minor { color: var(--muted); font-size: 14.5px; margin-top: -8px; }
+.teach-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 44px; align-items: start; }
+.teach-cols > div { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.teach-cols .project { grid-template-columns: 104px minmax(0, 1fr); gap: 14px; }
+.teach-cols .project-tag { font-size: 11px; }
+.subhead { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin: 6px 0 -6px; }
 .teach .degree { color: var(--muted); font-size: 15px; }
 .teach .degree + .degree { margin-top: -6px; }
 
@@ -245,9 +253,9 @@ html { background: var(--bg); }
 .cv-link:hover { background: var(--accent); color: #fff; }
 
 /* Places strip under the intro */
-.places { list-style: none; margin: 6px 0 0; padding: 4px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px 12px; }
+.places { list-style: none; margin: 6px 0 0; padding: 4px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 12px 10px; }
 .places a.zoom { position: relative; }
-.places .count { position: absolute; right: 6px; bottom: 6px; background: rgba(16,52,63,.78); color: #fff; font: 600 11px/1 var(--font-mono); padding: 3px 6px; border-radius: 999px; }
+.places .count { position: absolute; right: 5px; bottom: 5px; background: rgba(16,52,63,.78); color: #fff; font: 600 11px/1 var(--font-mono); padding: 3px 6px; border-radius: 999px; }
 .places:empty { display: none; }
 .places li { min-width: 0; }
 .places a.zoom { display: block; width: 100%; aspect-ratio: 1; border-radius: 10px; overflow: hidden; cursor: zoom-in; box-shadow: 0 2px 8px rgba(16,52,63,.10); }
@@ -271,6 +279,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
   #research .project.rcard, #research .project.rcard.nofig { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
   .rcard-main { order: -1; }
   .mini-grid { grid-template-columns: 1fr; }
+  .teach-cols { grid-template-columns: 1fr; gap: 28px; }
   .portrait { width: 180px; order: -1; }
 }
 @media (max-width: 520px) {
@@ -297,7 +306,7 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
         <li><a href="#contact">Contact</a></li>
         <li><a class="ext" href="MX_Resume_2610.pdf"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>CV</a></li>
         <li><a class="ext" href="https://github.com/cc0231"><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</a></li>
-        <!-- <li><a class="ext" href="https://scholar.google.com/citations?user="><i class="fa-brands fa-google-scholar" aria-hidden="true"></i>Scholar</a></li> : add your profile id, then uncomment -->
+        <li><a class="ext" href="https://scholar.google.com/citations?user=Xp2uGNMAAAAJ&amp;hl=en"><i class="fa-brands fa-google-scholar" aria-hidden="true"></i>Scholar</a></li>
       </ul>
     </nav>
   </div>
@@ -309,29 +318,35 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
     <section id="about" aria-label="About">
       <div class="about">
       <div class="about-text">
-      <p class="role"><strong>PhD student</strong>, Biomedical Engineering &middot; UT Southwestern Medical Center &middot; Pediatric Cardiac MR Imaging Lab &middot; Dallas, TX</p>
+      <p class="role"><strong>PhD student</strong>, Biomedical Engineering &middot; UT Southwestern Medical Center</p>
+      <p class="hobbies"><span><i class="fa-solid fa-mountain" aria-hidden="true"></i>Climbing</span><span><i class="fa-solid fa-music" aria-hidden="true"></i>Piano</span><span><i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>Baking</span></p>
       <h2 class="hello">Hi, I&rsquo;m <span class="hello-name">Mengyuan (Cecilia) Xue</span>.</h2>
       <p class="lede">I build deep learning methods for cardiovascular MRI, from reconstructing accelerated 4D flow scans to segmenting the heart in patients with congenital heart disease.</p>
-      <p>I'm a PhD student in Biomedical Engineering at UT Southwestern, advised by <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a> in the Division of Pediatric Cardiology. My current work covers developing data-efficient foundation-model-based segmentation algorithms targeting single ventricle physiology. Before moving to Dallas, I've worked on medical imaging and computational research across multiple modalities: smartphone diagnostics and oral cancer prediction; PET/MR attenuation correction; CT radiomics recovery and 3D-printed phantom reproducibility analysis etc.</p>
-      <p class="cv-line"><a class="cv-link" href="MX_Resume_2610.pdf" title="Download my CV (PDF)"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>CV</a> <a class="cv-link" href="mailto:mengyuan.xue@utsouthwestern.edu"><i class="fa-regular fa-envelope" aria-hidden="true"></i>Email</a> <a class="cv-link" href="https://www.linkedin.com/in/ceciliaxue0201/"><i class="fa-brands fa-linkedin" aria-hidden="true"></i>LinkedIn</a>
-        <!-- <a class="cv-link" href="https://scholar.google.com/citations?user=YOUR_ID"><i class="fa-brands fa-google-scholar" aria-hidden="true"></i>Google Scholar</a> : add your Scholar profile URL, then uncomment --></p>
+      <p>I'm a PhD student in Biomedical Engineering at UT Southwestern, advised by <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a> in the Division of Pediatric Cardiology. Before starting my PhD, I worked on medical imaging and computational research across multiple modalities.</p>
+      <p class="cv-line"><a class="cv-link" href="MX_Resume_2610.pdf" title="Download my CV (PDF)"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>CV</a> <a class="cv-link" href="mailto:mengyuan.xue@utsouthwestern.edu"><i class="fa-regular fa-envelope" aria-hidden="true"></i>Email</a> <a class="cv-link" href="https://www.linkedin.com/in/ceciliaxue0201/"><i class="fa-brands fa-linkedin" aria-hidden="true"></i>LinkedIn</a> <a class="cv-link" href="https://scholar.google.com/citations?user=Xp2uGNMAAAAJ&amp;hl=en"><i class="fa-brands fa-google-scholar" aria-hidden="true"></i>Google Scholar</a></p>
       </div>
       <!-- Portrait: save a photo as img/profile.jpg (about 4:5, at least 480x600 px). Until then the "MX" placeholder shows. -->
       <figure class="portrait"><img src="img/profile.jpg" alt="Mengyuan Xue" onerror="this.remove()"></figure>
       </div>
       <ul class="places" aria-label="Places I have lived and visited">
         <li><a class="zoom gallery" href="img/places/bigsur-1.jpg" data-photos='["img/places/bigsur-1.jpg"]' aria-label="Big Sur - 2026: 1 photo"><img src="img/places/bigsur-thumb.jpg" alt="Big Sur - 2026" loading="lazy"></a><span>Big Sur &middot; 2026</span></li>
+        <li><a class="zoom gallery" href="img/places/sf-1.jpg" data-photos='["img/places/sf-1.jpg"]' aria-label="San Francisco - 2026: 1 photo"><img src="img/places/sf-thumb.jpg" alt="San Francisco - 2026" loading="lazy"></a><span>San Francisco &middot; 2026</span></li>
         <li><a class="zoom gallery" href="img/places/seattle-1.jpg" data-photos='["img/places/seattle-1.jpg"]' aria-label="Seattle - 2026: 1 photo"><img src="img/places/seattle-thumb.jpg" alt="Seattle - 2026" loading="lazy"></a><span>Seattle &middot; 2026</span></li>
-        <li><a class="zoom gallery" href="img/places/saltlake-1.jpg" data-photos='["img/places/saltlake-1.jpg"]' aria-label="Salt Lake City - 2025: 1 photo"><img src="img/places/saltlake-thumb.jpg" alt="Salt Lake City - 2025" loading="lazy"></a><span>Salt Lake City &middot; 2025</span></li>
+        <li><a class="zoom gallery" href="img/places/saltlake-1.jpg" data-photos='["img/places/saltlake-1.jpg", "img/places/saltlake-2.jpg", "img/places/saltlake-3.jpg"]' aria-label="Salt Lake City - 2025: 3 photos"><img src="img/places/saltlake-thumb.jpg" alt="Salt Lake City - 2025" loading="lazy"><b class="count">3</b></a><span>Salt Lake City &middot; 2025</span></li>
         <li><a class="zoom gallery" href="img/places/place12-1.jpg" data-photos='["img/places/place12-1.jpg"]' aria-label="Big Bend National Park - 2025: 1 photo"><img src="img/places/place12-thumb.jpg" alt="Big Bend National Park - 2025" loading="lazy"></a><span>Big Bend National Park &middot; 2025</span></li>
+        <li><a class="zoom gallery" href="img/places/la-1.jpg" data-photos='["img/places/la-1.jpg"]' aria-label="Los Angeles - 2025: 1 photo"><img src="img/places/la-thumb.jpg" alt="Los Angeles - 2025" loading="lazy"></a><span>Los Angeles &middot; 2025</span></li>
         <li><a class="zoom gallery" href="img/places/austin-1.jpg" data-photos='["img/places/austin-1.jpg"]' aria-label="Austin - 2024: 1 photo"><img src="img/places/austin-thumb.jpg" alt="Austin - 2024" loading="lazy"></a><span>Austin &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/champaign-1.jpg" data-photos='["img/places/champaign-1.jpg", "img/places/champaign-2.jpg"]' aria-label="Champaign - 2024: 2 photos"><img src="img/places/champaign-thumb.jpg" alt="Champaign - 2024" loading="lazy"><b class="count">2</b></a><span>Champaign &middot; 2024</span></li>
         <li><a class="zoom gallery" href="img/places/chicago-1.jpg" data-photos='["img/places/chicago-1.jpg"]' aria-label="Chicago - 2024: 1 photo"><img src="img/places/chicago-thumb.jpg" alt="Chicago - 2024" loading="lazy"></a><span>Chicago &middot; 2024</span></li>
         <li><a class="zoom gallery" href="img/places/stlouis-1.jpg" data-photos='["img/places/stlouis-1.jpg", "img/places/stlouis-2.jpg", "img/places/stlouis-4.jpg", "img/places/stlouis-5.jpg"]' aria-label="St. Louis - 2024: 4 photos"><img src="img/places/stlouis-thumb.jpg" alt="St. Louis - 2024" loading="lazy"><b class="count">4</b></a><span>St. Louis &middot; 2024</span></li>
-        <li><a class="zoom gallery" href="img/places/champaign-1.jpg" data-photos='["img/places/champaign-1.jpg", "img/places/champaign-2.jpg"]' aria-label="Champaign - 2024: 2 photos"><img src="img/places/champaign-thumb.jpg" alt="Champaign - 2024" loading="lazy"><b class="count">2</b></a><span>Champaign &middot; 2024</span></li>
         <li><a class="zoom gallery" href="img/places/twincities-1.jpg" data-photos='["img/places/twincities-1.jpg", "img/places/twincities-2.jpg"]' aria-label="Minneapolis - 2024: 2 photos"><img src="img/places/twincities-thumb.jpg" alt="Minneapolis - 2024" loading="lazy"><b class="count">2</b></a><span>Minneapolis &middot; 2024</span></li>
         <li><a class="zoom gallery" href="img/places/houston-1.jpg" data-photos='["img/places/houston-1.jpg", "img/places/houston-2.jpg"]' aria-label="Houston & Galveston - 2024: 2 photos"><img src="img/places/houston-thumb.jpg" alt="Houston & Galveston - 2024" loading="lazy"><b class="count">2</b></a><span>Houston &amp; Galveston &middot; 2024</span></li>
         <li><a class="zoom gallery" href="img/places/dallas-1.jpg" data-photos='["img/places/dallas-1.jpg", "img/places/dallas-2.jpg", "img/places/dallas-3.jpg", "img/places/dallas-4.jpg"]' aria-label="Dallas - 2024: 4 photos"><img src="img/places/dallas-thumb.jpg" alt="Dallas - 2024" loading="lazy"><b class="count">4</b></a><span>Dallas &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/collegepark-1.jpg" data-photos='["img/places/collegepark-1.jpg", "img/places/collegepark-2.jpg"]' aria-label="College Park - 2023: 2 photos"><img src="img/places/collegepark-thumb.jpg" alt="College Park - 2023" loading="lazy"><b class="count">2</b></a><span>College Park &middot; 2023</span></li>
+        <li><a class="zoom gallery" href="img/places/baltimore-3.jpg" data-photos='["img/places/baltimore-3.jpg", "img/places/baltimore-2.jpg", "img/places/baltimore-1.jpg"]' aria-label="Baltimore - 2023: 3 photos"><img src="img/places/baltimore-thumb.jpg" alt="Baltimore - 2023" loading="lazy"><b class="count">3</b></a><span>Baltimore &middot; 2023</span></li>
         <li><a class="zoom gallery" href="img/places/place13-1.jpg" data-photos='["img/places/place13-1.jpg"]' aria-label="Harpers Ferry - 2023: 1 photo"><img src="img/places/place13-thumb.jpg" alt="Harpers Ferry - 2023" loading="lazy"></a><span>Harpers Ferry &middot; 2023</span></li>
+        <li><a class="zoom gallery" href="img/places/princeton-1.jpg" data-photos='["img/places/princeton-1.jpg"]' aria-label="Princeton - 2023: 1 photo"><img src="img/places/princeton-thumb.jpg" alt="Princeton - 2023" loading="lazy"></a><span>Princeton &middot; 2023</span></li>
+        <li><a class="zoom gallery" href="img/places/hartford-1.jpg" data-photos='["img/places/hartford-1.jpg"]' aria-label="New Haven - 2023: 1 photo"><img src="img/places/hartford-thumb.jpg" alt="New Haven - 2023" loading="lazy"></a><span>New Haven &middot; 2023</span></li>
         <li><a class="zoom gallery" href="img/places/dc-1.jpg" data-photos='["img/places/dc-1.jpg", "img/places/dc-2.jpg", "img/places/dc-5.jpg"]' aria-label="Washington, DC - 2022: 3 photos"><img src="img/places/dc-thumb.jpg" alt="Washington, DC - 2022" loading="lazy"><b class="count">3</b></a><span>Washington, DC &middot; 2022</span></li>
       </ul>
     </section>
@@ -560,72 +575,82 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
 
     <section id="teaching" aria-labelledby="teaching-h">
       <div class="sec-head"><h2 id="teaching-h">Teaching &amp; Service</h2></div>
-      <ul class="edu teach">
-        <li class="project">
-          <div class="project-tag">08/2022&ndash;05/2023<br>Johns Hopkins</div>
-          <div class="project-body">
-            <h3>Graduate Teaching Assistant</h3>
-            <p class="degree">Biomedical Data Science Laboratory (580.475/477), Dr. Brian Caffo</p>
-            <p class="degree">Physiology for Applied Biomedical Engineering I (585.601), Dr. Caitlin Torgerson</p>
-          </div>
-        </li>
-        <li class="project">
-          <div class="project-tag">08/2019&ndash;05/2021<br>WashU</div>
-          <div class="project-body">
-            <h3>Undergraduate Teaching Assistant</h3>
-            <p class="degree">Introduction to Biomedical Engineering (BME 140) &middot; Bioengineering Thermodynamics (BME 320) &middot; Introduction to Computer Science (CSE 131) &middot; Introduction to Data Science (CSE 217) &middot; Data Structures and Algorithms (CSE 247) &middot; Introduction to Machine Learning (CSE 417)</p>
-          </div>
-        </li>
-        <li class="project">
-          <div class="project-tag">08/2018&ndash;05/2021<br>WashU</div>
-          <div class="project-body">
-            <h3>Grader</h3>
-            <p class="degree">Lead grader for Differential Equations (Math 217) and Foundations for Higher Mathematics (Math 310); grader for Mathematics in Physical Science (Math 308) and Probability (Math 493)</p>
-          </div>
-        </li>
-        <li class="project">
-          <div class="project-tag">10/2022&ndash;present<br>WashU</div>
-          <div class="project-body">
-            <h3>Alumni Interviewer</h3>
-            <p class="degree">WUSTL Alumni and Parents Admission Program</p>
-          </div>
-        </li>
-        <li class="project">
-          <div class="project-tag">04/2021&ndash;06/2022<br>Johns Hopkins</div>
-          <div class="project-body">
-            <h3>Secretary</h3>
-            <p class="degree">JHU Chinese Students and Scholars Association (JHUCSSA)</p>
-          </div>
-        </li>
-        <li class="project">
-          <div class="project-tag">07/2024&ndash;present<br>Rice University</div>
-          <div class="project-body">
-            <h3>Member</h3>
-            <p class="degree">Rice University Chinese Students and Scholars Association</p>
-          </div>
-        </li>
-        <li class="project">
-          <div class="project-tag">06/2020&ndash;08/2020<br>Learning Lodge</div>
-          <div class="project-body">
-            <h3>Volunteer Mathematics Tutor</h3>
-            <p class="degree">Free online tutoring for an eighth-grade student</p>
-          </div>
-        </li>
-        <li class="project">
-          <div class="project-tag">2018&ndash;2019<br>WashU</div>
-          <div class="project-body">
-            <h3>Student Leadership</h3>
-            <p class="degree">Bear Leader, Make Your Impact program (2019) &middot; International Student Orientation leader (2018) &middot; Peer mentor, International Summer Study Program (2018&ndash;2019) &middot; Chemistry Tournament logistics committee (2018&ndash;2019) &middot; Celebration Days overnight host (2018)</p>
-          </div>
-        </li>
-        <li class="project">
-          <div class="project-tag">2018&ndash;2021<br>WashU</div>
-          <div class="project-body">
-            <h3>Honor Society Memberships</h3>
-            <p class="degree">Tau Beta Pi (Engineering Honor Society) &middot; Alpha Eta Mu Beta (Biomedical Engineering Honor Society) &middot; Biomedical Engineering Society (BMES), student member</p>
-          </div>
-        </li>
-      </ul>
+      <div class="teach-cols">
+        <div>
+          <h3 class="subhead">Teaching</h3>
+          <ul class="edu teach">
+            <li class="project">
+              <div class="project-tag">08/2022&ndash;05/2023<br>Johns Hopkins</div>
+              <div class="project-body">
+                <h3>Graduate Teaching Assistant</h3>
+                <p class="degree">Biomedical Data Science Laboratory (580.475/477), Dr. Brian Caffo</p>
+                <p class="degree">Physiology for Applied Biomedical Engineering I (585.601), Dr. Caitlin Torgerson</p>
+              </div>
+            </li>
+            <li class="project">
+              <div class="project-tag">08/2019&ndash;05/2021<br>WashU</div>
+              <div class="project-body">
+                <h3>Undergraduate Teaching Assistant</h3>
+                <p class="degree">Introduction to Biomedical Engineering (BME 140) &middot; Bioengineering Thermodynamics (BME 320) &middot; Introduction to Computer Science (CSE 131) &middot; Introduction to Data Science (CSE 217) &middot; Data Structures and Algorithms (CSE 247) &middot; Introduction to Machine Learning (CSE 417)</p>
+              </div>
+            </li>
+            <li class="project">
+              <div class="project-tag">08/2018&ndash;05/2021<br>WashU</div>
+              <div class="project-body">
+                <h3>Grader</h3>
+                <p class="degree">Lead grader for Differential Equations (Math 217) and Foundations for Higher Mathematics (Math 310); grader for Mathematics in Physical Science (Math 308) and Probability (Math 493)</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="subhead">Service</h3>
+          <ul class="edu teach">
+            <li class="project">
+              <div class="project-tag">07/2024&ndash;present<br>Rice University</div>
+              <div class="project-body">
+                <h3>Secretary</h3>
+                <p class="degree">Rice University Chinese Students and Scholars Association</p>
+              </div>
+            </li>
+            <li class="project">
+              <div class="project-tag">10/2022&ndash;present<br>WashU</div>
+              <div class="project-body">
+                <h3>Alumni Interviewer</h3>
+                <p class="degree">WUSTL Alumni and Parents Admission Program</p>
+              </div>
+            </li>
+            <li class="project">
+              <div class="project-tag">04/2021&ndash;06/2022<br>Johns Hopkins</div>
+              <div class="project-body">
+                <h3>Secretary</h3>
+                <p class="degree">JHU Chinese Students and Scholars Association (JHUCSSA)</p>
+              </div>
+            </li>
+            <li class="project">
+              <div class="project-tag">06/2020&ndash;08/2020<br>Learning Lodge</div>
+              <div class="project-body">
+                <h3>Volunteer Mathematics Tutor</h3>
+                <p class="degree">Free online tutoring for an eighth-grade student</p>
+              </div>
+            </li>
+            <li class="project">
+              <div class="project-tag">2018&ndash;2019<br>WashU</div>
+              <div class="project-body">
+                <h3>Student Leadership</h3>
+                <p class="degree">Bear Leader, Make Your Impact program (2019) &middot; International Student Orientation leader (2018) &middot; Peer mentor, International Summer Study Program (2018&ndash;2019) &middot; Chemistry Tournament logistics committee (2018&ndash;2019) &middot; Celebration Days overnight host (2018)</p>
+              </div>
+            </li>
+            <li class="project">
+              <div class="project-tag">2018&ndash;2021<br>WashU</div>
+              <div class="project-body">
+                <h3>Honor Society Memberships</h3>
+                <p class="degree">Tau Beta Pi (Engineering Honor Society) &middot; Alpha Eta Mu Beta (Biomedical Engineering Honor Society) &middot; Biomedical Engineering Society (BMES), student member</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section id="contact" aria-labelledby="contact-h">
