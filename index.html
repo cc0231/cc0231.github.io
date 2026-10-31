@@ -222,6 +222,13 @@ html { background: var(--bg); }
 .lightbox { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; padding: 4vh 4vw;
   background: rgba(10, 18, 24, .86); cursor: zoom-out; }
 .lightbox.open { display: flex; }
+.lightbox button { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: 0;
+  border-radius: 999px; background: rgba(255,255,255,.16); color: #fff; font-size: 30px; line-height: 1; cursor: pointer; }
+.lightbox button:hover { background: rgba(255,255,255,.3); }
+.lightbox.multi button { display: block; }
+.lightbox .lb-prev { left: 3vw; } .lightbox .lb-next { right: 3vw; }
+.lightbox .lb-count { position: absolute; bottom: 3vh; left: 0; right: 0; text-align: center; color: #fff; font: 13px var(--font-mono); }
+.lightbox.multi img { cursor: e-resize; }
 .lightbox img { max-width: 92vw; max-height: 88vh; background: #fff; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
 
 /* About: text on the left, portrait on the right */
@@ -232,19 +239,21 @@ html { background: var(--bg); }
 .portrait::before { content: "MX"; font-family: var(--font-display); font-size: 64px; letter-spacing: 0.02em; color: var(--rule); }
 .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-.cv-line { margin-top: -6px; }
+.cv-line { margin-top: -6px; display: flex; flex-wrap: wrap; gap: 8px; }
 .cv-link { display: inline-flex; align-items: center; gap: 5px; margin-left: 0; padding: 1px 9px; border: 1px solid var(--accent);
   border-radius: 999px; font-size: 13.5px; font-weight: 600; text-decoration: none; white-space: nowrap; vertical-align: 1px; }
 .cv-link:hover { background: var(--accent); color: #fff; }
 
 /* Places strip under the intro */
-.places { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.places { list-style: none; margin: 6px 0 0; padding: 4px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px 12px; }
+.places a.zoom { position: relative; }
+.places .count { position: absolute; right: 6px; bottom: 6px; background: rgba(16,52,63,.78); color: #fff; font: 600 11px/1 var(--font-mono); padding: 3px 6px; border-radius: 999px; }
 .places:empty { display: none; }
-.places li { width: 120px; display: flex; flex-direction: column; gap: 5px; }
-.places a.zoom { display: block; aspect-ratio: 1; border-radius: 10px; overflow: hidden; cursor: zoom-in; box-shadow: 0 2px 8px rgba(16,52,63,.10); }
+.places li { min-width: 0; }
+.places a.zoom { display: block; width: 100%; aspect-ratio: 1; border-radius: 10px; overflow: hidden; cursor: zoom-in; box-shadow: 0 2px 8px rgba(16,52,63,.10); }
 .places img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
 .places a.zoom:hover img { transform: scale(1.05); }
-.places span { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); text-align: center; white-space: nowrap; letter-spacing: -.01em; }
+.places span { display: block; margin-top: 5px; font-family: var(--font-mono); font-size: 10.5px; line-height: 1.35; color: var(--muted); text-align: center; white-space: normal; }
 
 /* Placeholders the owner still needs to fill in */
 .fill { background: var(--fill); color: var(--fill-ink); padding: 0 4px; border-radius: 2px; font-style: normal; }
@@ -304,17 +313,27 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
       <h2 class="hello">Hi, I&rsquo;m <span class="hello-name">Mengyuan (Cecilia) Xue</span>.</h2>
       <p class="lede">I build deep learning methods for cardiovascular MRI, from reconstructing accelerated 4D flow scans to segmenting the heart in patients with congenital heart disease.</p>
       <p>I'm a PhD student in Biomedical Engineering at UT Southwestern, advised by <a href="https://labs.utsouthwestern.edu/hussain-tarique-lab">Dr. Tarique Hussain</a> in the Division of Pediatric Cardiology. My current work covers developing data-efficient foundation-model-based segmentation algorithms targeting single ventricle physiology. Before moving to Dallas, I've worked on medical imaging and computational research across multiple modalities: smartphone diagnostics and oral cancer prediction; PET/MR attenuation correction; CT radiomics recovery and 3D-printed phantom reproducibility analysis etc.</p>
-      <p class="cv-line"><a class="cv-link" href="MX_Resume_2610.pdf" title="Download my CV (PDF)"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>CV</a></p>
-      <ul class="places" aria-label="Places I have lived">
-        <li><a class="zoom" href="places/stlouis.jpg" aria-label="St. Louis"><img src="places/stlouis.jpg" alt="St. Louis" loading="lazy" onerror="this.closest('li').remove()"></a><span>St. Louis &middot; 2017&ndash;21</span></li>
-        <li><a class="zoom" href="places/baltimore.jpg" aria-label="Baltimore"><img src="places/baltimore.jpg" alt="Baltimore" loading="lazy" onerror="this.closest('li').remove()"></a><span>Baltimore &middot; 2021&ndash;22</span></li>
-        <li><a class="zoom" href="places/houston.jpg" aria-label="Houston"><img src="places/houston.jpg" alt="Houston" loading="lazy" onerror="this.closest('li').remove()"></a><span>Houston &middot; 2023&ndash;25</span></li>
-        <li><a class="zoom" href="places/dallas.jpg" aria-label="Dallas"><img src="places/dallas.jpg" alt="Dallas" loading="lazy" onerror="this.closest('li').remove()"></a><span>Dallas &middot; 2025&ndash;</span></li>
-      </ul>
+      <p class="cv-line"><a class="cv-link" href="MX_Resume_2610.pdf" title="Download my CV (PDF)"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>CV</a> <a class="cv-link" href="mailto:mengyuan.xue@utsouthwestern.edu"><i class="fa-regular fa-envelope" aria-hidden="true"></i>Email</a> <a class="cv-link" href="https://www.linkedin.com/in/ceciliaxue0201/"><i class="fa-brands fa-linkedin" aria-hidden="true"></i>LinkedIn</a>
+        <!-- <a class="cv-link" href="https://scholar.google.com/citations?user=YOUR_ID"><i class="fa-brands fa-google-scholar" aria-hidden="true"></i>Google Scholar</a> : add your Scholar profile URL, then uncomment --></p>
       </div>
       <!-- Portrait: save a photo as img/profile.jpg (about 4:5, at least 480x600 px). Until then the "MX" placeholder shows. -->
       <figure class="portrait"><img src="img/profile.jpg" alt="Mengyuan Xue" onerror="this.remove()"></figure>
       </div>
+      <ul class="places" aria-label="Places I have lived and visited">
+        <li><a class="zoom gallery" href="img/places/bigsur-1.jpg" data-photos='["img/places/bigsur-1.jpg"]' aria-label="Big Sur - 2026: 1 photo"><img src="img/places/bigsur-thumb.jpg" alt="Big Sur - 2026" loading="lazy"></a><span>Big Sur &middot; 2026</span></li>
+        <li><a class="zoom gallery" href="img/places/seattle-1.jpg" data-photos='["img/places/seattle-1.jpg"]' aria-label="Seattle - 2026: 1 photo"><img src="img/places/seattle-thumb.jpg" alt="Seattle - 2026" loading="lazy"></a><span>Seattle &middot; 2026</span></li>
+        <li><a class="zoom gallery" href="img/places/saltlake-1.jpg" data-photos='["img/places/saltlake-1.jpg"]' aria-label="Salt Lake City - 2025: 1 photo"><img src="img/places/saltlake-thumb.jpg" alt="Salt Lake City - 2025" loading="lazy"></a><span>Salt Lake City &middot; 2025</span></li>
+        <li><a class="zoom gallery" href="img/places/place12-1.jpg" data-photos='["img/places/place12-1.jpg"]' aria-label="Big Bend National Park - 2025: 1 photo"><img src="img/places/place12-thumb.jpg" alt="Big Bend National Park - 2025" loading="lazy"></a><span>Big Bend National Park &middot; 2025</span></li>
+        <li><a class="zoom gallery" href="img/places/austin-1.jpg" data-photos='["img/places/austin-1.jpg"]' aria-label="Austin - 2024: 1 photo"><img src="img/places/austin-thumb.jpg" alt="Austin - 2024" loading="lazy"></a><span>Austin &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/chicago-1.jpg" data-photos='["img/places/chicago-1.jpg"]' aria-label="Chicago - 2024: 1 photo"><img src="img/places/chicago-thumb.jpg" alt="Chicago - 2024" loading="lazy"></a><span>Chicago &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/stlouis-1.jpg" data-photos='["img/places/stlouis-1.jpg", "img/places/stlouis-2.jpg", "img/places/stlouis-4.jpg", "img/places/stlouis-5.jpg"]' aria-label="St. Louis - 2024: 4 photos"><img src="img/places/stlouis-thumb.jpg" alt="St. Louis - 2024" loading="lazy"><b class="count">4</b></a><span>St. Louis &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/champaign-1.jpg" data-photos='["img/places/champaign-1.jpg", "img/places/champaign-2.jpg"]' aria-label="Champaign - 2024: 2 photos"><img src="img/places/champaign-thumb.jpg" alt="Champaign - 2024" loading="lazy"><b class="count">2</b></a><span>Champaign &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/twincities-1.jpg" data-photos='["img/places/twincities-1.jpg", "img/places/twincities-2.jpg"]' aria-label="Minneapolis - 2024: 2 photos"><img src="img/places/twincities-thumb.jpg" alt="Minneapolis - 2024" loading="lazy"><b class="count">2</b></a><span>Minneapolis &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/houston-1.jpg" data-photos='["img/places/houston-1.jpg", "img/places/houston-2.jpg"]' aria-label="Houston & Galveston - 2024: 2 photos"><img src="img/places/houston-thumb.jpg" alt="Houston & Galveston - 2024" loading="lazy"><b class="count">2</b></a><span>Houston &amp; Galveston &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/dallas-1.jpg" data-photos='["img/places/dallas-1.jpg", "img/places/dallas-2.jpg", "img/places/dallas-3.jpg", "img/places/dallas-4.jpg"]' aria-label="Dallas - 2024: 4 photos"><img src="img/places/dallas-thumb.jpg" alt="Dallas - 2024" loading="lazy"><b class="count">4</b></a><span>Dallas &middot; 2024</span></li>
+        <li><a class="zoom gallery" href="img/places/place13-1.jpg" data-photos='["img/places/place13-1.jpg"]' aria-label="Harpers Ferry - 2023: 1 photo"><img src="img/places/place13-thumb.jpg" alt="Harpers Ferry - 2023" loading="lazy"></a><span>Harpers Ferry &middot; 2023</span></li>
+        <li><a class="zoom gallery" href="img/places/dc-1.jpg" data-photos='["img/places/dc-1.jpg", "img/places/dc-2.jpg", "img/places/dc-5.jpg"]' aria-label="Washington, DC - 2022: 3 photos"><img src="img/places/dc-thumb.jpg" alt="Washington, DC - 2022" loading="lazy"><b class="count">3</b></a><span>Washington, DC &middot; 2022</span></li>
+      </ul>
     </section>
 
     <section id="publications" aria-labelledby="pubs-h">
@@ -648,17 +667,32 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
 (function () {
   var box = document.createElement('div');
   box.className = 'lightbox'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true');
-  var big = document.createElement('img'); box.appendChild(big); document.body.appendChild(box);
+  box.innerHTML = '<button class="lb-prev" aria-label="Previous photo">&#8249;</button><img alt=""><button class="lb-next" aria-label="Next photo">&#8250;</button><div class="lb-count"></div>';
+  document.body.appendChild(box);
+  var big = box.querySelector('img'), cnt = box.querySelector('.lb-count'), list = [], idx = 0;
+  function show() {
+    big.src = list[idx];
+    var multi = list.length > 1;
+    box.classList.toggle('multi', multi);
+    cnt.textContent = multi ? (idx + 1) + ' / ' + list.length : '';
+  }
+  function step(d) { if (list.length > 1) { idx = (idx + d + list.length) % list.length; show(); } }
   function close() { box.classList.remove('open'); big.removeAttribute('src'); }
   document.querySelectorAll('a.zoom').forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
-      big.src = a.getAttribute('href'); big.alt = (a.querySelector('img') || {}).alt || '';
-      box.classList.add('open');
+      list = a.dataset.photos ? JSON.parse(a.dataset.photos) : [a.getAttribute('href')];
+      idx = 0; big.alt = (a.querySelector('img') || {}).alt || ''; show(); box.classList.add('open');
     });
   });
+  box.querySelector('.lb-prev').addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+  box.querySelector('.lb-next').addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  big.addEventListener('click', function (e) { e.stopPropagation(); step(1); });
   box.addEventListener('click', close);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close(); else if (e.key === 'ArrowRight') step(1); else if (e.key === 'ArrowLeft') step(-1);
+  });
 })();
 </script>
 <script>
