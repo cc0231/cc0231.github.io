@@ -198,15 +198,16 @@ html { background: var(--bg); }
 .rcard a.chip:hover { border-color: var(--pc); background: color-mix(in srgb, var(--pc) 10%, var(--surface)); }
 
 /* Additional projects: image-first mini cards */
-.mini-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.mini-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1000px) { .mini-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .mini { background: var(--surface); border: 1px solid var(--rule); border-top: 4px solid var(--pc); border-radius: 12px; overflow: hidden;
   box-shadow: 0 1px 2px rgba(16, 52, 63, .04), 0 8px 22px rgba(16, 52, 63, .05); display: flex; flex-direction: column; }
-.mini-img { position: relative; overflow: hidden; margin: 0 16px 16px; aspect-ratio: 2 / 1; background: #fff; }
+.mini-img { position: relative; overflow: hidden; margin: auto 12px 12px; aspect-ratio: 4 / 3; background: #fff; }
 .mini-img img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; background: #fff; }
-.mini-body { order: -1; padding: 16px 16px 12px; display: flex; flex-direction: column; gap: 4px; }
+.mini-body { order: -1; padding: 14px 14px 10px; display: flex; flex-direction: column; gap: 4px; }
 .mini-meta { font-family: var(--font-mono); font-size: 11.5px; color: var(--pc); font-weight: 600; letter-spacing: .03em; text-transform: uppercase; }
-.mini h3 { font-size: 16px; font-weight: 600; line-height: 1.35; }
-.mini p { font-size: 14.5px; color: var(--muted); }
+.mini h3 { font-size: 15px; font-weight: 600; line-height: 1.35; }
+.mini p { font-size: 13.5px; line-height: 1.5; color: var(--muted); }
 
 /* About: text on the left, portrait on the right */
 .hello { font-family: var(--font-display); font-weight: 500; font-size: 46px; line-height: 1.12; letter-spacing: -0.015em; margin: 2px 0 -4px; }
