@@ -414,8 +414,8 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
         <div class="rcard-side">
           <div class="project-tag">Cardiac segmentation<br>single ventricle</div>
               <figure class="fig">
-                <img src="img/svmrseg_qual.png" alt="Short-axis cine test slices with manual contours in light blue and predictions in magenta for SimLVSeg with SSL, the SAM2 baseline and SV-MRSeg at end-diastole and end-systole. Dice ranges from 0.84 to 0.96." loading="lazy">
-                <figcaption>Test slices at the median (top) and 25th-percentile (bottom) SV-MRSeg Dice, at end-diastole (ED) and end-systole (ES). Light blue: manual contour; magenta: prediction; number: Dice.</figcaption>
+                <img src="img/svmrseg_qual.png" alt="Short-axis cine slices from an HLHS and a DORV patient with manual contours in light blue and predictions in magenta for SimLVSeg with SSL, the SAM2 baseline and SV-MRSeg at end-diastole and end-systole. SV-MRSeg reaches Dice 0.966 to 0.981; SimLVSeg with SSL drops to 0.74 to 0.78." loading="lazy">
+                <figcaption>Two test patients (HLHS, top; DORV, bottom) at end-diastole (ED) and end-systole (ES). Light blue: manual contour; magenta: prediction; number: Dice.</figcaption>
               </figure>
           <div class="chips">
             <span class="chip status">ISMRM 2027 &middot; submitted</span>
@@ -449,8 +449,8 @@ footer { color: var(--muted); font-size: 13px; font-family: var(--font-mono); bo
         <div class="rcard-side">
           <div class="project-tag">MR reconstruction<br>4D flow</div>
               <figure class="fig">
-                <img src="img/flow4d.png" alt="Aortic 4D flow slice, magnitude and velocity magnitude: the fully sampled reference, a training-matched baseline (SSIM 0.924) and the proposed JSSL reconstruction (SSIM 0.956); the baseline underestimates the high-velocity jet, the proposed result matches the reference." loading="lazy">
-                <figcaption>Magnitude (top) and velocity (bottom) of one aortic slice: reference, training-matched baseline, and ours. The baseline washes out the high-velocity jet; ours keeps it.</figcaption>
+                <img src="img/flow4d.png" alt="Aortic 4D flow slice, magnitude and velocity magnitude: the fully sampled reference, a training-matched baseline (SSIM 0.924, relative velocity error 0.457, angular error 22.9 degrees) and the proposed JSSL reconstruction (SSIM 0.956, relative velocity error 0.234, angular error 16.3 degrees); the baseline underestimates the high-velocity jet, the proposed result matches the reference." loading="lazy">
+                <figcaption>Magnitude (top) and velocity (bottom) of one aortic slice: reference, training-matched baseline, and ours. The baseline washes out the high-velocity jet; ours keeps it. Corner values: SSIM (magnitude), relative and angular velocity error (velocity).</figcaption>
               </figure>
           <div class="chips">
             <span class="chip status">MICCAI 2026 &middot; CMRx4DFlow</span>
